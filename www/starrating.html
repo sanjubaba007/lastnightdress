@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>EWS Rating Stars jQuery Plugin Demos</title>
+        <script src="myjqmjs/jquery.js"></script>
+        <script src="ews_rating_stars/ewsRatingStars.jquery.js"></script>
+        <link rel="stylesheet" type="text/css" href="ews_rating_stars/ewsRatingStars.jquery.css">
+
+        
+    </head>
+    <body>
+    
+        <div id="value"></div>
+
+
+        
+
+        
+
+        <div class="active-stars-yellow space"></div>
+        
+
+        <script>
+            jQuery(document).ready(function() {
+                
+
+                jQuery('.active-stars-yellow').ewsRatingStars({
+                    class : 'ewsRatingStarColorRed',
+                    defaultValue : 0,
+					onSetValue : function (obj, value) {
+                        jQuery('#value').html('Current value: ' + value);
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

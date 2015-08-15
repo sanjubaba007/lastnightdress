@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+          <script type="text/javascript" src="cordova.js"></script>
+       
+       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+   <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>	
+	  
+       
+  
+<script type="text/javascript" charset="utf-8">
+
+    // Wait for device API libraries to load
+    //
+    function onLoad() {
+    
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        // Register the event listener
+		getData();
+    //setup();
+     }
+
+   
+function setup(result)
+{
+$('#pageLoader').hide();
+
+
+
+  var obj = jQuery.parseJSON( result );
+var i=0;
+$.each(obj.data, function(idx, obj) {
+
+$("#dynamictable").append($('<div>',{class:'mydiv',id:'mydivd'+i,style:'margin-top:0px'}));
+
+ $('#mydivd'+i).append('<img src="' + obj.imageurl + '" align="left" class="circle" />');
+
+$("#mydivd"+i).append($('<label>',{id:i,class:'test'+i,style:'color:#be4d66;font-size:18px;text-decoration:none;float:left;margin-left:10px;padding-top:6px'}));
+$("#"+i).text(obj.username);
+$("#dynamictable").append("<br/><br/>");
+
+$("#dynamictable").append($('<div>',{class:'mydiv',id:'mydive'+i,style:'margin-top:0px;'}));
+$("#mydive"+i).append($('<p>',{id:i,class:'msg'+i,style:'padding-left:50px;padding-right:2px'}));
+$(".msg"+i).text(obj.message);
+$("#dynamictable").append($('<div>',{class:'mydiv',id:'mydivf'+i,style:'margin-top:10px;padding-left:50px'}));
+$("#mydivf"+i).append($('<label>',{id:i,class:'date'+i,style:'margin:top:20px'}));
+$(".date"+i).text(obj.date);
+i++;
+});
+
+}
+function getData()
+ {
+    $.ajax({
+    type: 'GET',
+     url:'http://192.168.56.1/loaddata.php',
+    timeout: 5000,
+    success: function(data, textStatus ){
+       
+      setup(data);  
+        
+    },
+    error: function(xhr, textStatus, errorThrown){
+       alert('problem in loading comments right now');
+   $('#pageLoader').hide();
+   
+    }
+  });
+}
+
+    </script>
+ 
+ 
+<style>
+body
+{
+font-size:14px;
+    text-transform:none;
+}
+#dynamictable
+{
+    width:100%;
+    background-color:white;
+    
+    
+}
+.circle
+{
+border-radius:50% 50% 50% 50%;
+width:40px;
+height:40px;
+border: 2px solid #ffffff;
+
+
+}
+.mydiv
+    {
+    width:100%;
+    height:100%;
+    background-color:white;
+    
+    }
+#pageLoader
+{
+ 
+   position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -32px; /* -1 * image width / 2 */
+  margin-top: -32px;
+  
+}
+#div
+{
+ width: 100%;
+    height: 250px;
+    
+
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0%;
+    right: 0;
+
+    margin: auto;
+    background-color:#abc123;
+}
+.ajax-loader {
+  position: absolute;
+    left: 0;
+    top: 0;
+    right: -32px; /* -1 * image width / 2 */
+    margin-top: -32px;  /* -1 * image height / 2 */
+    display: block;
+}
+.ui-mobile .ui-page {
+
+background: white;//-webkit-linear-gradient(top, #f4f3ff, rgba(93, 177, 223, 0.75));
+
+ }
+</style>
+
+    </head>
+    <body  onload="onLoad()">
+     <div id="#div">
+       <img src="img/loading.gif" id=pageLoader class=ajax-loader/> 
+ </div>
+     <div id="dynamictable">
+ 
+     
+    
+</div>
+
+    </body>
+</html>

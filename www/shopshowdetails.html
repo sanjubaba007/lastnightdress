@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+   <link rel="stylesheet" type="text/css" href="jqm/jquery.mobile-1.4.2.min.css" />
+  <script src="jqm/jquery.min.js"></script>
+  <script src="jqm/jquery.mobile-1.4.2.min.js"></script>
+  <script src="js/jquery.timeago.js"></script>
+  <script src="js/jquery.timeago2.js"></script>
+
+   <script type="text/javascript" src="cordova.js"></script>
+
+
+
+
+
+
+
+<script type="text/javascript" charset="utf-8">
+var called=0,cmnt=0,cmnt2=1,pos=0;
+var postid,image_url,cost;
+var images=[];
+var check=0,check2=0;
+var opt=0,count=0;
+
+    // Wait for device API libraries to load
+
+    $(document).on("pagecreate", function () {
+    $("#myPopup2").popup({
+        beforeposition: function () {
+
+            $(this).css({
+                width: window.innerWidth-22,
+                height: window.innerHeight/2-40,
+                margin:10
+            });
+        },
+        x: 50,
+        y: 50
+    });
+});
+
+    function onLoad() {
+
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
+//setting for zoom image
+
+
+   $("#display").attr("src","img/actress2.jpg");
+    $( ".photopopup" ).on({
+
+        popupbeforeposition: function() {
+
+            var maxHeight = $( window ).height() - 60 + "px";
+            $( ".photopopup img" ).css( "max-height", maxHeight );
+
+
+        }
+    });
+
+    function onDeviceReady() {
+    //detecting comment scroll
+
+
+$("#commentdiv").scroll(function() {
+    if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+   if(check2==1)
+   getComments();
+    }
+});
+
+
+
+
+     //on comment back press
+     $("#back-comment").click(function()
+     {
+     $("#cmntdialog").hide();
+     $('html, body').css({
+    'overflow': 'auto',
+    'height': 'auto'
+});
+
+     });
+
+   $("#cmntdialog").hide();
+$("#shadowdiv").click(function(){
+$("#shadowdiv").hide();
+});
+$("#shadowdiv").hide();
+      var height = $(window).height();
+      var w = $(window).width();
+
+    // $(".ui-popup-container").height(height);
+     $("#myPopup1").height(height);
+    // $(".ui-popup-container").width(w);
+   //  $("#myPopup1").width(w);
+
+     $("#commentdiv").height(height-60);
+		//like unlike
+
+    $('#myimg').click(function() {touchStart() });
+
+
+     //send button
+$("#send").click(function(){
+
+  var now = new Date().toLocaleString();
+
+
+     var message=document.getElementById("msg").value;
+    // alert(message);
+    var un= localStorage.getItem("uname");
+    var ppic= localStorage.getItem("url");
+
+     $("#commentdiv").append('<table style="width:100%;table-layout: fixed;"><tr><td style="width:50px;vertical-align:top" ><img src="'+ppic+'" class="circle" /></td><td style="vertical-align:top;padding-top:10px"><p style=" word-break:break-all;font-family:ppfont;font-size:14px"><span style="font-size:14px;font-family:unfont;text-transform: capitalize;font-size:16px;color:#be4d66">'+un+'  </span>'+message+'</p><br/><div style="margin-top:-15px"><time class="timeago" datetime="'+now+'" style="font-size:14px;color:#dadada;"></div></td></tr></table>');
+$(".timeago").timeag();
+     postComment(message);
+
+});
+  //event to go back
+   $("#back").on("click", function() {
+    $("#back").css('background-color','#be4d66');
+
+    history.go(0);
+    navigator.app.backHistory();
+});
+
+    $("#swap").click(function(){
+
+$( "#myPopup2" ).popup( "open" );
+
+
+    });
+    $("#cancel").click(function(){
+    //     $(this).css('background-color','#dadada');
+      $("#shadowdiv").hide();
+        $( "#myPopup2" ).popup( "close" );
+
+
+    });
+
+   //event to delete photo
+    $("#delpost").click(function(){
+     // $(this).css("background-color","#be4d66");
+      $("#shadowdiv").hide();
+        $( "#myPopup2" ).popup( "close" );
+      deletePost();
+//alert('called');
+    });
+
+    $("#more").click(function(){
+
+$( "#myPopup2" ).popup( "close" );
+
+
+    });
+
+    //buy event
+    $("#buy").click(function(){
+
+ location.href = "../www/buyform.html";
+
+
+    });
+
+    //edit event
+    $("#edit").click(function(){
+
+$(this).css('background-color','#dadada');
+$("#myPopup1").popup("open");
+
+    });
+
+
+    //edit 2
+     $("#edit2").click(function() {
+//    $("#edit2").css("background-color","#be4d66");
+     location.href = "../www/editprivatepost.html";
+
+    // $("#myPopup1").popup("close");
+  // alert('called');
+    });
+
+
+ //delete
+     $("#delete").click(function() {
+    //$("#delete").css("background-color","#be4d66");
+     $("#myPopup1").popup("close");
+     opt=1;
+  /* var r = confirm("Do you wanna delete this post ?");
+if (r == true)
+ {
+   deletePost();
+}   */
+
+
+    });
+
+    //cancel
+     $("#close").click(function() {
+   // $("#close").css("background-color","#be4d66");
+     $("#myPopup1").popup("close");
+    });
+
+      //popup close event
+   $( "#myPopup1" ).popup({
+  afterclose: function( event, ui ) {
+  $('html, body').css({
+    'overflow': 'auto',
+    'height': 'auto'
+});
+   $("#edit2").css("background-color","#fff");
+    $("#delete").css("background-color","#fff");
+   $("#close").css("background-color","#fff");
+   if(opt==1)
+    {
+        opt=0;
+    $("#shadowdiv").show();
+     $("#myPopup2").popup("open");
+    }
+  }
+
+});
+
+//popup open event
+$( "#myPopup1" ).popup({
+  afteropen: function( event, ui ) {
+   $('html, body').css({
+    'overflow': 'hidden',
+    'height': '100%'
+});
+   $("#edit").css("background-color","#fff");
+
+  }
+});
+
+     }
+
+
+function setup(data)
+{
+//get widdth and height of the screen
+var w = $(window).width();
+
+var h=$(window).height();
+
+h=(h*70)/100-105;
+
+
+	 var json = JSON.parse(data);
+var i=0,j=0;
+var colordcode="#dadada";
+ postid=json.postid;
+ image_url=json.image_url;
+ cost=json.price_now;
+ localStorage.setItem("profilename",json.uname);
+//setting images to array
+ images.push(json.image_url);
+ images.push(json.image_url1);
+ images.push(json.image_url2);
+ images.push(json.image_url3);
+
+ var data=localStorage.getItem(postid);
+ $("#dynamictable").append($('<div>',{class:'mydiv',id:'mydivd'+i,style:'margin-top:-2px'}));
+
+$('#mydivd'+i).append('<table width="100%"> <tr> <td style="width:50px"><img src="' + json.profile_pic + '" class="circle" /></td><td><label style="text-align:left;text-transform: capitalize;color:#be4d66;text-size:16px;font-family:unfont">'+json.uname+'</label></td>  <td align="right"><time class="timeago" datetime="2015-06-16 11:39:34" style="font-size:16px"></td></tr></table>');
+$(".timeago").timeago();
+
+$("#dynamictable").append($('<div>',{class:'mydiv',id:'mydiva'+i,style:'margin-top:-2px;position:relative;'}));
+
+ //setting image
+ $("#mydiva"+i).prepend($('<div>',{class:'imgcontainer',id:'myimg'}));
+     $(".imgcontainer").width(w).height(h);
+     $(".imgcontainer").css("background-image","url("+json.image_url+")");
+
+
+ //setting favorates icon
+ if(data!=null)
+{
+ $("#mydiva"+i).prepend($('<div>',{class:'top',id:'favorite'+i,style:'float:right'}));
+
+$("#favorite"+i).prepend($('<img>',{id:'theImg'+i,src:'img/rating_icon.png',style:'width:23px;height:23px'}));
+
+}
+else
+{
+ $("#mydiva"+i).prepend($('<div>',{id:'pacman',style:'float:right'}));
+ $("#pacman").prepend($('<img>',{id:'theImg'+i,src:'img/rating_star.png',style:'position:absolute;top:-30px;left:-11px;z-index:5;width:23px;height:23px'   }));
+
+}
+
+
+ $("#mydiva"+i).prepend($('<div>',{class:'bottom',id:'delipckup'+i,style:'width:100%;height:20px;'}));
+  $("#delipckup"+i).prepend($('<div>',{class:'delipckup',id:'delivery'+i,style:'float:right;margin-right:10px;background:transparent;padding-bottom:6px'}));
+  $("#delipckup"+i).prepend($('<div>',{class:'delipckup2',id:'pickup'+i,style:'float:right;margin-right:10px;background:transparent;padding-bottom:6px'}));
+$("#delipckup"+i).prepend($('<div>',{class:'mylist',id:'showpos',style:'float:left;'}));
+ //slide icon left right
+ $("#showpos").append('<img src="img/white_icon.png" id="0" class="swipeicon" />');
+  $("#showpos").append('<img src="img/black_icon.png" style="margin-left:5px" id="1" class="swipeicon" />');
+     $("#showpos").append('<img src="img/black_icon.png" style="margin-left:5px" id="2" class="swipeicon" />');
+  $("#showpos").append('<img src="img/black_icon.png" style="margin-left:5px" id="3" class="swipeicon" />');
+
+
+
+$("#delivery"+i).append($('<span>',{id:'data1'+i,style:'color:#fff;margin-left:2px;margin-bottom:3px;font-size:12px;font-family:ppfont'}));
+$("#pickup"+i).append($('<span>',{id:'data2'+i,style:'color:#fff;margin-left:2px;margin-bottom:3px;font-size:12px;font-family:ppfont'}));
+
+$("#data1"+i).text("DELIVERY");
+$("#data2"+i).text("PICK UP");
+
+
+
+
+$("#dynamictable").append($('<div>',{class:'mydiv',id:'mydivb'+i,style:'padding-left:10px;padding-top:2px;padding-bottom:10px;padding-right:10px'}));
+
+$('#mydivb'+i).append('<table width=100%></table>');
+
+$('#mydivb'+i).children().append("<tr><td colspan='2'><div><label id='like' style='float:left;font-size:15px;border-style:solid;border-width:1.5px;border-color:#dadada;padding-left:5px;padding-right:5px;padding-top:3px;-webkit-border-radius:99px;-moz-border-radius: 99px;border-radius: 99px;color:#dadada'>Like</label><label class='like' style='float:left;margin-left:10px;font-size:15px;margin-top:4px'>"+json.likes+"</label></td><td><div align='right' style='padding-right:20px'><select id='size' style='padding:5px' data-native-menu='false'></select><select id='color' style='margin-left:5px;padding:5px' ></select></div></td> </tr><tr><td colspan='2'><div><label style='float:left;font-weight:bold;font-size:17px'>$"+json.price_now+"</label> <label style='margin-left:10px;float:left;text-color:#DADADA;font-weight:bold;font-size:17px'><del style='color:#dadada'>$"+json.price_was+"</del></label></div></td><td><div align='right' style='margin-right:20px;font-weight:bold'></div></td></tr>");
+
+//to check like post like status
+if(json.liked=="1")
+{
+    $("#like").css('border-color', '#be4d66');
+	$("#like").css('color', '#be4d66');
+}
+else
+{
+     $("#like").css('border-color', '#dadada');
+	$("#like").css('color', '#dadada');
+}
+
+
+$("#mydivb"+i).append($('<label>',{id:json.uname,class:'data'+i,style:'text-align:left;width:100%;height:20px'}));
+$(".data"+i).prepend($('<span>',{id:'span'+i,style:'color:#be4d66;margin-right:0px;font-family:unfont;font-size:16px;text-transform: capitalize;'}));
+$("#span"+i).text(json.uname);
+$(".data"+i).append("        "+json.description);
+
+$("#mydivb"+i).append($('<div>',{class:'mydiv',id:'mydive'+i,style:'margin-top:10px'}));
+$("#mydive"+i).append($('<div>',{id:'cmnt'+i,style:'float:left'}));
+$("#cmnt"+i).append($('<a>',{id:'docmnt'+i,style:'color:#be4d66;font-size:15px;text-decoration:none;font-family:ppfont'}));
+$("#docmnt"+i).text("Comment");
+
+$("#mydive"+i).append($('<div>',{id:'cmnt2'+i,style:'float:left'}));
+$("#cmnt2"+i).append($('<a>',{id:"view"+i,class:'test'+i,style:'color:#be4d66;font-size:15px;text-decoration:none;margin-left:20px;font-family:ppfont'}));
+$("#view"+i).text("View "+json.comment+" Comments");
+//dropdown size appending
+var o = new Option("Size", "1");
+
+$("#size").append(o);
+var o1 = new Option("XL", "2");
+
+$("#size").append(o1);
+
+//dropdown color appending
+j++;
+if(json.black!='')
+{
+var color1 = new Option("black", j);
+$("#color").append(color1);
+}
+j++;
+if(json.silver!='')
+{
+var color2 = new Option("silver", j);
+$("#color").append(color2);
+}
+j++;
+if(json.orange!='')
+{
+var color3 = new Option("orange",j);
+$("#color").append(color3);
+}
+j++;
+if(json.white!='')
+{
+var color4 = new Option("white",j);
+$("#color").append(color4);
+}
+
+j++;
+if(json.gold!='')
+{
+var color5 = new Option("gold",j);
+$("#color").append(color5);
+}
+
+j++;
+if(json.brown!='')
+{
+var color6 = new Option("brown",j);
+$("#color").append(color6);
+}
+
+j++;
+if(json.red!='')
+{
+var color7 = new Option("red",j);
+$("#color").append(color7);
+}
+
+j++;
+if(json.purple!='')
+{
+var color8 = new Option("purple",j);
+$("#color").append(color8);
+}
+
+j++;
+if(json.nude!='')
+{
+var color9 = new Option("nude",j);
+$("#color").append(color9);
+}
+
+j++;
+if(json.blue!='')
+{
+var color10 = new Option("blue",j);
+$("#color").append(color10);
+}
+
+j++;
+if(json.yallow!='')
+{
+var color11 = new Option("yallow",j);
+$("#color").append(color11);
+}
+
+j++;
+if(json.grey!='')
+{
+var color12 = new Option("grey",j);
+$("#color").append(color12);
+}
+
+j++;
+if(json.green!='')
+{
+var color13 = new Option("green",j);
+$("#color").append(color13);
+}
+
+j++;
+if(json.pink!='')
+{
+var color14 = new Option("pink",j);
+$("#color").append(color14);
+}
+
+//like event
+$('#like').click(function(){
+
+   likeunlike(this.id);
+});
+//show profile event
+$('.data'+i).click(function(){
+   localStorage.setItem("profilename",$(this).attr('id'));
+    location.href = "../www/userprofileview.html";
+
+});
+//comment event
+$("#view"+i).click(function(){
+     count=0;
+       check=2;
+       check2=1;
+      var height = $(window).height();
+      var w = $(window).width();
+
+  $('html, body').css({
+    'overflow': 'hidden',
+    'height': '100%'
+});
+
+     $("#cmntdialog").show();
+     $("#cmntdialog").height(height);
+       $("#header").height(40);
+     $("#commentdiv").height(height-105);
+     $("#cmntbox").height(60);
+
+   $("#commentdiv").empty();
+     getComments();
+   $("#myPopup").popup("open");
+   });
+
+//comment box
+$("#docmnt"+i).click(function()
+{
+    count=0;
+    check=1;
+    check2=2;
+    //to setting popup height and width
+      var height = $(window).height();
+      var w = $(window).width();
+
+     $("#cmntdialog").show();
+     $("#cmntdialog").height(height);
+
+	 $("#header").height(40);
+     $("#commentdiv").height(height-105);
+		 $("#cmntbox").height(60);
+$("#commentdiv").empty();
+ getComments();
+$("#myPopup").popup("open");
+});
+
+ $("#theImg"+i).click(function(){
+ $("#pacman").css('border-color','transparent');
+  $(this).attr('src','img/now_favorite.png');
+  var postid= localStorage.getItem("postid");
+
+var data=localStorage.getItem(postid);
+if(data!=null)
+{
+//alert("available");
+
+}
+else
+{
+//alert("not available");
+
+
+var pos=localStorage.getItem("count");
+if(pos===null)
+{
+//alert('not available');
+pos=0;
+}
+else
+{
+alert(pos);
+pos++;
+}
+//postid,image_url,cost
+var mycars = new Array();
+mycars[0] = postid;
+mycars[1] = image_url;
+mycars[2] = cost;
+localStorage.setItem("count",pos);
+localStorage.setItem(postid,"hello");
+
+localStorage["mycars"+pos] = JSON.stringify(mycars);
+alert('saved');
+
+}
+});
+
+
+//set favorite
+var data=localStorage.getItem(postid);
+if(data!=null)
+{
+//alert("available");
+ //$("#favorite"+i).prepend($('<img>',{id:'theImg'+i,src:'img/now_favorite.png'}));
+ $("#theImg"+i).attr("src","img/now_favorite.png");
+}
+
+//events for sliding
+
+ $("#myimg").on("swiperight",function(){
+ pos--;
+ if(pos==-1)
+ pos=3;
+  $(".imgcontainer").css("background-image","url("+images[pos]+")");
+
+ change(pos);
+  });
+$("#myimg").on("swipeleft",function(){
+ pos++;
+ if(pos==4)
+ pos=0;
+ change(pos);
+
+ $(".imgcontainer").css("background-image","url("+images[pos]+")");
+
+
+});
+
+
+
+
+}
+function change(id)
+{
+$('#0').attr("src",'img/black_icon.png');
+$('#1').attr("src",'img/black_icon.png');
+$('#2').attr("src",'img/black_icon.png');
+$('#3').attr("src",'img/black_icon.png');
+$('#'+id).attr("src",'img/white_icon.png');
+
+}
+function showcomments(result)
+{
+//$('#pageLoader').hide();
+
+
+
+ var obj = jQuery.parseJSON( result );
+
+$.each(obj.data, function(idx, obj) {
+
+count++;
+$("#commentdiv").append('<table style="width:100%;table-layout: fixed;"><tr><td style="width:50px;vertical-align:top" ><img src="'+obj.imgurl+'" class="circle" /></td><td style="vertical-align:top;padding-top:10px"><p style=" word-break:break-all;font-family:ppfont;font-size:14px"><span style="font-size:14px;font-family:unfont;text-transform: capitalize;font-size:16px;color:#be4d66">'+obj.uname+'  </span>'+obj.comment+'</p><br/><div style="margin-top:-15px"><time class="timeago" datetime="'+obj.time+'" style="font-size:14px;color:#dadada;"></div></td></tr></table>');
+$(".timeago").timeag();
+});
+if(check==1)
+$("#commentdiv").animate({ scrollTop: $("#commentdiv")[0].scrollHeight}, 100);
+
+
+
+}
+function getComments()
+ {
+  $("#sendimg").attr('src','img/send_loader.gif');
+
+ var postid= localStorage.getItem("postid");
+  var request = $.ajax({
+    type: 'POST',
+    timeout: 5000,
+    url: 'http://52.74.70.40/lnd/lndcomments.php',
+    data: {postid:postid,skipdata:count} })
+    .done(function(data) {
+    var json = JSON.parse(data);
+//alert(data);
+$("#sendimg").attr('src','img/send_icon.png');
+ showcomments(data);
+
+    })
+    .fail(function() { alert("unable to load post info"); })
+    .always(function() {$("#sendimg").attr('src','img/send_icon.png');
+   });
+
+}
+function getPost()
+ {
+var postid= localStorage.getItem("postid");
+var uname= localStorage.getItem("uname");
+
+var i;
+  var request = $.ajax({
+    type: 'POST',
+    timeout: 5000,
+    url: 'http://52.74.70.40/lnd/postdata.php',
+    data: {postid:postid,un:uname,rqid:2} })
+    .done(function(data) {
+    var json = JSON.parse(data);
+
+ localStorage.setItem("item",data);
+
+
+ setup(data);
+
+    })
+    .fail(function() { alert("unable to load post info"); })
+    .always(function() { $('#pageLoader').hide(); });
+
+}
+
+function likeunlike(cls)
+    {
+
+   var un= localStorage.getItem("uname");
+   var postid= localStorage.getItem("postid");
+    var request = $.ajax({
+    type: 'POST',
+    timeout: 5000,
+    url: 'http://52.74.70.40/lnd/lndlikeunlike.php',
+    data: {userid:un,postid:postid} })
+    .done(function(data) {
+    var json = JSON.parse(data);
+
+    if (json.status == true)
+	{
+	if(json.value==2)
+	{
+	//$("."+cls).css('border-color', '#be4d66');
+	//$("."+cls).css('color', '#be4d66');
+	//$("."+cls).attr('style','float:left;font-size:15px;border-style:solid;border-width:1.5px;border-color:#be4d66;padding-left:5px;padding-right:5px;padding-top:3px;-webkit-border-radius:99px;-moz-border-radius: 99px;border-radius: 99px;');
+	$("#"+cls).css('border-color', '#be4d66');
+	$("#"+cls).css('color', '#be4d66');
+
+	var txt = $('.'+cls).html();
+	txt=txt/1+1;
+	$('.'+cls).html(txt);
+	}
+	else
+	{
+	$("#"+cls).css('border-color', '#dadada');
+	$("#"+cls).css('color', '#dadada');
+
+
+	var txt = $('.'+cls).html();
+	txt=txt/1-1;
+	$('.'+cls).html(txt);
+
+	}
+	}
+	else
+	{
+	alert(json.message);
+
+	}
+
+    })
+    .fail(function() { alert("error");
+    })
+    .always(function() { });
+
+    }
+getPost();
+
+
+
+function deletePost()
+{
+  var postid= localStorage.getItem("postid");
+   var request = $.ajax({
+    type: 'POST',
+    timeout: 5000,
+    url: 'http://52.74.70.40/lnd/postdata.php',
+    data: {postid:postid,rqid:6} })
+    .done(function(data) {
+    var json = JSON.parse(data);
+
+   if(json.status==true)
+   {
+    location.href = "../www/mainprofileview.html";
+ // alert(json.message);
+   }
+   else
+   {
+   alert(json.message);
+   }
+    })
+    .fail(function() { alert("unable to delete post."); })
+    .always(function() { $('#pageLoader').hide();});
+
+
+
+
+}
+function postComment(message)
+ {
+     count++;
+       $("#sendimg").attr("src","img/send_loader.gif");
+   var postid= localStorage.getItem("postid");
+
+ var un= localStorage.getItem("uname");
+   var url=localStorage.getItem("url");
+
+     var request = $.ajax({
+    type: 'POST',
+    timeout: 5000,
+    url: 'http://52.74.70.40/lnd/lndcomments.php',
+    data: {uname:un,postid:postid,comment:message,imgurl:url,rqid:1} })
+    .done(function(data) {
+    var json = JSON.parse(data);
+
+    if (json.status == true)
+	{
+	 alert(json.message);
+	}
+
+	else
+	{
+	alert(json.message);
+
+	}
+
+    })
+    .fail(function() { alert("error on posting comment");
+    })
+    .always(function() { $("#sendimg").attr("src","img/send_icon.png");});
+}
+
+
+   var clickTimer = null;
+
+function touchStart() {
+
+    if (clickTimer == null) {
+        clickTimer = setTimeout(function () {
+            clickTimer = null;
+          //alert("single"+images[pos]);
+
+    $("#display").attr("src",images[pos]);
+      var height = $(window).height();
+      var w = $(window).width();
+      w=(w*98)/100;
+    var h=(height*98)/100;
+    // $(".ui-popup-container").height(height);
+     $("#popupPhotoPortrait").width(w);
+       $("#popupPhotoPortrait").height(h);
+    $( "#popupPhotoPortrait" ).popup( "open" );
+
+
+        }, 1000)
+    } else {
+
+        clearTimeout(clickTimer);
+        clickTimer = null;
+       likeunlike('like');
+
+
+    }
+}
+
+window.addEventListener('native.hidekeyboard', keyboardHideHandler);
+window.addEventListener('native.showkeyboard', keyboardShowHandler);
+function keyboardHideHandler(e){
+  // alert('Goodnight, sweet prince');
+  var height = $(window).height();
+   $("#commentdiv").height(height-105);
+
+  //document.getElementById('mainbody').setAttribute("style","height:395px");
+
+}
+function keyboardShowHandler(e){
+//    alert('Keyboard height is: ' + e.keyboardHeight);
+//    document.getElementById('mainbody').setAttribute("style","max-height:140px;min-height:140px;overflow:auto");
+var height = $(window).height();
+$("#commentdiv").height(height-(e.keyboardHeight/2.5));
+
+}
+    </script>
+
+
+<style>
+
+.mylist
+{
+
+width:90px;
+height:18px;
+}
+.likebtn
+{
+
+-webkit-border-radius: 99px;
+-moz-border-radius: 99px;
+border-radius: 99px;
+
+}
+.delipckup
+{
+
+width:65px;
+height:12px;
+-webkit-border-radius: 99px;
+-moz-border-radius: 99px;
+border-radius: 99px;
+border:1px solid #fff;
+background-color:#000;
+opacity: 0.7;
+    filter: alpha(opacity=70);
+}
+.delipckup2
+{
+
+width:55px;
+height:12px;
+-webkit-border-radius: 99px;
+-moz-border-radius: 99px;
+border-radius: 99px;
+border:1px solid #fff;
+background-color:#000;
+opacity: 0.7;
+    filter: alpha(opacity=70);
+}
+body
+{
+font-size:14px;
+    text-transform:none;
+}
+
+#dynamictable
+{
+    width:100%;
+    background-color:white;
+    margin-top:48px;
+
+}
+.circle
+{
+border-radius:50% 50% 50% 50%;
+width:40px;
+height:40px;
+border: 2px solid #ffffff;
+
+
+}
+.mydiv
+    {
+    width:100%;
+    height:100%;
+    background-color:white;
+
+    }
+
+.ui-mobile .ui-page {
+
+background: white;//-webkit-linear-gradient(top, #f4f3ff, rgba(93, 177, 223, 0.75));
+
+ }
+ .header-cont {
+    position:fixed; top:0%; right:0%;z-index:100;
+    width:100%;
+    background-color:#fff;
+
+}
+#footer
+{
+    background:#be4d66;
+    position:fixed;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    height:40px;
+    margin-bottom:0px;
+    width:100%;
+   }
+     .bottom {
+   position:absolute;
+    bottom:3px;
+        padding:5px 5px 5px 5px;
+    background-color:#000000;
+    z-index:5;
+   background-color : transparent;
+}
+.top {
+   position:absolute;
+   top:0px;
+    padding:5px 5px 5px 5px;
+    background-color:#000000;
+    z-index:5;
+   background-color : transparent;
+   right:0px;
+   float:right;
+}
+.ui-popup-container, .ui-popup {
+
+      max-width: 100% !important;
+
+     width: 100%;
+    padding:0;
+   background:rgba(248,248,248,0.5)
+   margin:0;
+}
+.ui-dialog .ui-dialog-content {
+    padding:0;
+}
+#myPopup2
+{
+font-size:14px;
+}
+hr { margin-top:0px;margin-bottom:0px; color:#DADADA;}
+
+p
+{
+    margin:0;
+    padding-left:11%;
+    vertical-align:middle;
+    display:table-cell;
+   padding:0;
+}
+
+#pacman {
+    width: 0;
+    height: 0;
+    border-right: 17px solid #BDBDBD;
+    border-top: 35px solid #BDBDBD;
+    border-left: 15px solid #BDBDBD;
+    border-bottom: 17px solid transparent;
+    position:absolute;
+
+	z-index:100;
+	top:0px;
+	right:10px;
+	float:right;
+}
+.imgcontainer
+{
+
+   // background-image: url("http://www.billboard.com/files/styles/promo_650/public/media/do-no-reuse-taylor-swift-the-beat-bb36-sarah-barlow-billboard-650.jpg");
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-color:#000;
+
+
+}
+#sendimg{
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.ui-corner-all {
+   -webkit-border-radius:.0 !important;
+   border-radius: 0 !important;
+}
+.swipeicon
+{
+  width:15px;
+  height:15px;
+}
+.ajax-loader {
+  position: absolute;
+    left: 0;
+    top: 0;
+    right: -32px; /* -1 * image width / 2 */
+    margin-top: -32px;  /* -1 * image height / 2 */
+    display: block;
+}
+#pageLoader
+{
+ z-index:100;
+   position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -32px; /* -1 * image width / 2 */
+  margin-top: -32px;
+
+}
+@font-face {
+    font-family:ppfont;
+    src: url(fonts/AvenirNextLTPro-Regular.otf);
+}
+@font-face {
+    font-family:hfont;
+    src: url(fonts/AvenirNextLTPro-Bold.otf);
+}
+@font-face {
+    font-family:unfont;
+    src: url(fonts/AvenirNextLTPro-Demi.otf);
+}
+.fulldiv
+{
+  position:fixed;
+    padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+
+    width: 100%;
+    height: 100%;
+  background:rgba(248,248,248,0.5);
+    z-index:1000;
+}
+#header
+{
+    width: 100%;
+    height: 40px;
+    background-color:#be4d66;
+   // box-shadow: 4px 4px 4px #888888;
+    clear:both;
+}
+.ui-focus {
+ -moz-box-shadow: none !important;
+ -webkit-box-shadow: none !important;
+ box-shadow: none !important;
+}
+</style>
+
+    </head>
+    <body  onload="onLoad()">
+   <div id="#loadbar">
+       <img src="img/dataload.gif" id=pageLoader class=ajax-loader/>
+ </div>
+   <!-- Header -->
+
+  <div style="width:100%;height:45px;position:fixed; top:0%; right:0%;z-index:100;background-color:#fff;"><div id="back" style="width:10%;height:45px;float:left"><img src="img/back_arrow.png" style="margin-top:10px;margin-left:5px;width:25px;height:25px"/></div><div style="width:80%;height:45px;float:left;background-color:#fff"><h1 align="center" style="margin-top:13px;font-size:18px;ont-family:hfont;color:#3c4653">Photo</h5></div><div id="edit" style="width:10%;height:45px;background-color:#fff;float:left"><h5 align="center" style="margin-top:15px;font-weight:bold;font-size:16px;color:#be4d66;font-family:ppfont;margin-right:2px">Edit</h5></div>
+   <hr size=1 />
+   </div>
+    <div style="margin-bottom:48px;">
+   <center>
+ <div id="dynamictable">
+
+</div>
+</center>
+<!-- comment div -->
+<div id="comments" style="width:100%;margin-top:20px;margin-bottom:55px">
+
+</div>
+<!-- end here -->
+<div id="commentbox"/>
+</div>
+
+
+
+
+    <div id="footer" >
+
+   <div id="buy" style="width:100%;height:40px;background-color:#be4d66;float:left;color:white;">
+       <center>
+       <div id="buy" style="width:60px" align="center"><img src="img/shopping.png" style="float:left;margin-top:10px;widht:20px;height:20px" /><p id="spaytxt" class="fix" style="float:left;margin-left:5px;margin-top:10px">Buy</p></div>
+  </center>
+    </div>
+   </div>
+
+
+  <div data-role="popup" id="myPopup1" class="ui-content" data-transition="slideup" data-position-to="#footer" data-corners="false"  data-tolerance="0" style="position:relative;background:rgba(119,136,153,0.5)"  >
+
+   <div style="position:absolute;bottom:0px;width:100%">
+
+<div id="edit2" style="color:#000;background-color:#fff;min-height:45px;width:100%; text-align:left;display:table;" id="capture" >
+ <p style="padding-left:10%;font-family:ppfont">Edit</h5>
+</div >
+  <hr size=1 color="#DADADA">
+<div id="delete" style="color:#000;background-color:#fff;min-height:45px;width:100%; text-align:left;display:table;" id="gallery" >
+ <p style="padding-left:10%;font-family:ppfont">Delete</h5>
+</div >
+    <hr size=1 color="#DADADA">
+<div id="close" style="color:#000;background-color:#fff;min-height:45px;width:100%; text-align:left;display:table;" id="cancel" >
+ <p style="padding-left:10%;font-family:ppfont">Cancel</h5>
+</div >
+</div>
+</div>
+
+
+<!-- second pop up -->
+<div  id="cmntdialog" data-transition="slideup" style="position:fixed;z-index:1001;top:0;left:0;width:100%;height:100%;background-color:#fff;display:none">
+         <div id="header" ><table style=" table-layout: fixed;height:40px"><tr><td id="back-comment"><img src="img/back_comment.png" style="width:32px;height:32px" /></td><td><span style="color:#fff;font-family:unfont" />Comments</span></td></tr></table></div>
+
+       <div style="overflow-y:scroll;overflow-x:hidden;display:block;background-color:#fff;width:100%;clear:both;margin-top:5px;" id="commentdiv"></div>
+       <!--comment box -->
+       <div id="cmntbox" style="width:100%;clear:both;"><div style="width:80%;height:50px;float:left"><input id="msg" name="" type="text" style="width:100%;height:50px;border:none" placeholder="Add a comment" /></div><div id="send" align="center" style="width:20%;height:52px;float:left;  background-color:#be4d66;position:relative;margin-top:8px"><img src="img/send_icon.png" id="sendimg" style="width:24px;height:24px" /></div></div>
+
+       <!-- end here -->
+    </div>
+
+
+ <div data-role="popup" id="popupPhotoPortrait" class="photopopup" data-overlay-theme="a" data-corners="true" data-tolerance="30,15">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><img id="display"  alt="Photo portrait">
+</div>
+
+
+
+ <!-- pop for asking user to delete photo -->
+<div data-role="popup" id="myPopup2" style="width:100%" data-corners="false"  style="box-shadow:none;background:rgba(248,248,248,0.5)" data-position-to="window">
+
+    <br/>
+    <center>
+    <p style="font-size:16px;color:#000;font-family:hfont;text-align:center">Delete photo</p>
+    </center>
+
+    <div style="width:100%;font-size:16px;position:absolute;top:40%;" align="center">
+  <center>
+    <p style="line-height:5px;font-size:16px;font-family:unfont">Are you sure you want</p>
+    <br>
+    <p style="line-height:5px;font-size:16px;font-family:unfont">to delete this post ?</p>
+    </center>
+    </div>
+
+    <br>
+    <div class="ui-grid-a" style="position:absolute;bottom:-8px;width:100%">
+    <div class="ui-block-a"><button type="submit" id="cancel"  data-corners="false" data-transition="flip" style="background-color:eff1f4;color:#A4A4A4;box-shadow:none">Cancel</button></div>
+    <div class="ui-block-b"><button type="submit" id="delpost"  data-corners="false" style="background-color:eff1f4;color:#A4A4A4;box-shadow:none">Delete</button></div>
+</div>
+
+
+    </div>
+</center>
+<!-- popup end -->
+<!-- div for to provide back shadow -->
+<div id="shadowdiv" class="fulldiv"/>
+      </body>
+</html>

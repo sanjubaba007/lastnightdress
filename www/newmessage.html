@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+       
+          <script type="text/javascript" src="cordova.js"></script>
+       
+       <script src="js/jquery.js"></script>
+   
+	 
+	  
+       
+  
+<script type="text/javascript" charset="utf-8">
+
+    // Wait for device API libraries to load
+    //
+    function onLoad() {
+    
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        // Register the event listener
+		
+    
+     }
+
+   
+
+function sendData()
+ {
+    $.ajax({
+    type: 'GET',
+     url:'http://192.168.56.1/loaddata.php',
+    timeout: 5000,
+    success: function(data, textStatus ){
+       
+      setup(data);  
+        
+    },
+    error: function(xhr, textStatus, errorThrown){
+       alert('Error on loading data');
+       $('#pageLoader').hide();
+    }
+  });
+}
+
+$( document ).ready(function() {
+    $("#done").on("click", function() {
+     $(this).css('background-color','#dadada');
+   sendMessage($("#msg").val());
+});  
+ //event to go back
+   $("#back").on("click", function() {
+    $("#back").css('background-color','#be4d66');
+  
+       history.go(0);
+    navigator.app.backHistory(); 
+
+});     
+
+     $("#to").text(localStorage.getItem("profilename"));
+$('#pageLoader').hide();
+
+});
+
+function sendMessage(message)
+ {
+    $('#pageLoader').show();
+     var sun=localStorage.getItem("uname");
+    var surl=localStorage.getItem("url");
+    var  run=localStorage.getItem("profilename");
+    var request = $.ajax({
+    type: 'POST',
+    timeout: 5000,
+    url: 'http://52.74.70.40/lnd/inboxope.php',
+    data: {sname:sun,sid:sun,rid:run,msg:message,sprofpic:surl,rqid:2} })
+    .done(function(data) {  
+    $('#pageLoader').hide();
+    var json = JSON.parse(data);
+   $("#done").css('background-color','#fff');
+   $("#msg").val("Type your message here");
+   history.go(-1);
+    navigator.app.backHistory(); 
+    if(json.status==true)
+    {
+   // alert(json.message);
+    }
+    else
+    {
+    alert(json.message);
+    }
+    
+    })
+    .fail(function() { alert("error");$('#pageLoader').hide(); 
+    })
+    .always(function() { $("#done").css('background-color','#fff');$('#pageLoader').hide();
+   });
+}
+    </script>
+ 
+ 
+<style>
+body
+{
+
+    text-transform:none;
+    background:#fff;
+     
+}
+#dynamictable
+{
+    width:100%;
+    background-color:white;
+    margin-bottom:50px;
+    
+}
+.circle
+{
+border-radius:50% 50% 50% 50%;
+width:40px;
+height:40px;
+border: 2px solid #ffffff;
+
+
+}
+.mydiv
+    {
+    width:100%;
+    height:100%;
+    background-color:white;
+    
+    }
+#pageLoader
+{
+ 
+   position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -32px; /* -1 * image width / 2 */
+  margin-top: -32px;
+  
+}
+#div
+{
+ width: 100%;
+    height: 250px;
+    
+
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0%;
+    right: 0;
+
+    margin: auto;
+    background-color:#abc123;
+}
+.ajax-loader {
+  position: absolute;
+    left: 0;
+    top: 0;
+    right: -32px; /* -1 * image width / 2 */
+    margin-top: -32px;  /* -1 * image height / 2 */
+    display: block;
+}
+
+#footer
+{
+    background-color:#DADADA;
+    position:fixed;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    height:50px;
+    margin-bottom:0px;
+    width:100%;
+    border-style: solid;
+    border-width: 1px;
+    border-color:#DADADA;
+}
+input {
+ outline:none;
+}
+ 
+ #reply
+			 {
+    margin:auto;
+    line-height:50px;
+    vertical-align:middle;
+       }
+       hr { margin: 0.1em auto; color:#DADADA;}
+       
+       .ajax-loader {
+  position: absolute;
+    left: 0;
+    top: 0;
+    right: -32px; /* -1 * image width / 2 */
+    margin-top: -32px;  /* -1 * image height / 2 */
+    display: block;
+}
+#pageLoader
+{
+ z-index:100;
+   position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -32px; /* -1 * image width / 2 */
+  margin-top: -32px;
+  
+}
+@font-face {
+    font-family:ppfont;
+    src: url(fonts/AvenirNextLTPro-Regular.otf);
+}
+@font-face {
+    font-family:hfont;
+    src: url(fonts/AvenirNextLTPro-Bold.otf);
+}
+</style>
+
+    </head>
+    <body  onload="onLoad()" >
+    <div id="#loadbar">
+       <img src="img/dataload.gif" id=pageLoader class=ajax-loader/> 
+ </div>
+    
+    
+   <div style="width:100%;height:45px;position:fixed; top:0%; right:0%;z-index:100;background-color:#fff;"><div id="back" style="width:10%;height:45px;float:left"><img align="center" src="img/close_icon.png" style="margin-top:10px;margin-left:5px;width:25px;height:25px"/></div><div style="width:75%;height:45px;float:left;"><h1 align="center" style="width:100%;height:40px;margin:auto;text-align:center;padding-top:13px;font-size:18px;font-family:hfont">New Message</h4></div><div id="done" style="width:15%;height:45px;float:right;"><h4 align="center" style="width:100%;height:40px;margin:auto;text-align:center;padding-top:12px;color:#be4d66;font-family:ppfont"><img src="img/save_changes.png" style="width:24px;height:24px" /></div>
+   <hr size=1 />
+   </div> 
+
+     <div id="#div" style="display:none">
+       <img src="img/loading.gif" id=pageLoader class=ajax-loader/> 
+ </div>
+     <div style="margin-top:55px">
+   <p  style="color:#be4d66;font-size:17px;padding-left:15px"><span style="color:#DADADA;font-size:14px"> To:  </span> <span id=to>Olivia Newton Wilde</span></p>
+    <hr color="#DADADA" size=1 style="margin-top:-5px" />
+ 
+<center>
+ <textarea id="msg" rows="20" cols="50" style="width:95%;height:100%;border-style:none">
+your message goes here...
+</textarea>
+</center>
+
+</div>
+
+    </body>
+</html>

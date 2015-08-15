@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+       <meta charset="utf-8" />
+   <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+           
+          
+       
+          <link rel="stylesheet" href="css/jquery-ui.css">
+          
+  <script src="js/jquery-1.10.2.js"></script>
+  <script src="js/jquery-ui.js"></script>
+   <script src="cordova.js"></script>
+  
+   <script src="js/jquery.ui.touch-punch.min.js"></script>
+  
+	  
+       
+ 
+
+ 
+ <script type="text/javascript" charset="utf-8">
+  var imgid1,imgid2,imgid3,imgid,check=0;
+  var currimg;
+  var imgfirst=1,imgsecond=1,imgthird=1,imgfirstt=1;
+    var pictureSource;   // picture source
+    var destinationType; // sets the format of returned value
+
+
+jQuery(document).ready(function() {
+
+var width = $(window).width(), height = $(window).height();
+   
+   var h=(height*60)/100;
+  var divh=(height*20)/100;
+  $("#droppable1").height(h-45);
+$("#droppable2").width(width/4-8).height(width/4-8);
+$("#droppable3").width(width/4-8).height(width/4-8);
+$("#droppable4").width(width/4-8).height(width/4-8);
+ $(".cam").width(width/4-8).height(width/4-8);
+   $(".bottom").height(divh);
+  $(".collection").height(divh);
+   $(".collection").width(width);
+  var capbtn=(divh*50)/100;
+ $(".circle1").width(capbtn).height(capbtn);
+ $(".circle2").width(capbtn-10).height(capbtn-10);
+ $("#droppable2").css("margin-top","10");
+ 
+ //hide all close buttons on images
+ $("#close1").hide();
+ $("#close2").hide();
+ $("#close3").hide();
+  jQuery('.tabs .tab-links a').on('click', function(e)  {
+        var currentAttrValue = jQuery(this).attr('href');
+ 
+        // Show/Hide Tabs
+        jQuery('.tabs ' + currentAttrValue).show().siblings().hide();
+ 
+        // Change/remove current tab to active
+        jQuery(this).parent('li').addClass('active').siblings().removeClass('active');
+ 
+        e.preventDefault();
+    });
+    $("#postdata").click(function() {
+    $("#postdata").css("background-color","#be4d66");
+   imgid1=$('#first').attr('src');
+imgid2=$('#second').attr('src');
+imgid3=$('#third').attr('src');
+imgid4=$('#fourth').attr('src');;
+    alert(imgid1+imgid2+imgid3+imgid4);
+  if(check<4)
+{
+  alert('select image');
+}
+else
+{
+localStorage.setItem("imid1", imgid1);
+localStorage.setItem("imid2", imgid2);
+localStorage.setItem("imid3", imgid3);
+localStorage.setItem("imid4", imgid4);
+location.href = "../www/postbyprivate.html";
+}
+
+     
+    });
+    
+    //camera capture
+     $("#camera").click(function() {
+    //$("#camera").css("background-color","#be4d66");
+     $("#myPopup1").popup("close");
+    capturePhoto();
+    });
+    
+    //gallery
+     $("#gallery").click(function() {
+    //$("#gallery").css("background-color","#be4d66");
+     $("#myPopup1").popup("close");
+    getPhoto(pictureSource.SAVEDPHOTOALBUM);
+   
+    });
+
+
+    //cancel
+     $("#cancel").click(function() {
+    //$("#gallery").css("background-color","#be4d66");
+     $("#myPopup1").popup("close");
+    });
+    
+    
+//event to go back
+   $("#back").on("click", function() {
+    $("#back").css('background-color','#be4d66');
+  
+       history.go(0);
+    navigator.app.backHistory(); 
+
+});   
+
+//events for image selection
+//image 1
+$("#img1").on("click", function() {
+    $(this).css({"border-color": "#be4d66", 
+             "border-width":"2px", 
+             "border-style":"solid"});
+   $("#close1").show();
+ $("#close2").hide();
+ $("#close3").hide(); 
+  $("#img2").css('border','');  
+$("#img3").css('border','');  
+$("#img4").css('border','');  
+currimg=1;
+
+});
+
+//image 2
+$("#img2").on("click", function() {
+    $(this).css({"border-color": "#be4d66", 
+             "border-width":"2px", 
+             "border-style":"solid"});
+//hiding n showing icons
+ $("#close1").hide();
+ $("#close2").show();
+ $("#close3").hide();
+
+//changing border 
+$("#img1").css('border','');  
+$("#img3").css('border','');  
+$("#img4").css('border','');  
+currimg=2;
+
+});
+
+//image 3
+$("#img3").on("click", function() {
+    $(this).css({"border-color": "#be4d66", 
+             "border-width":"2px", 
+             "border-style":"solid"});
+$("#close1").hide();
+ $("#close2").hide();
+ $("#close3").show();
+
+$("#img2").css('border','');  
+$("#img1").css('border','');  
+$("#img4").css('border','');  
+    currimg=3;
+    
+});
+
+//capture image
+$(".circle2").on("click", function() {
+    $(this).css({"border-color": "#be4d66", 
+             "border-width":"2px", 
+             "border-style":"solid"});
+    
+  capturePhoto()
+  
+});
+
+
+$(".container").each(function(){
+    // Uncomment the following if you need to make this dynamic
+    var refH = $(this).height();
+    var refW = $(this).width();
+    var refRatio = refW/refH;
+    
+    // Hard coded value...
+   // var refRatio = 240/300;
+
+    var imgH = $(this).children("img").height();
+    var imgW = $(this).children("img").width();
+    
+    if ( (imgW/imgH) < refRatio ) { 
+        $(this).addClass("portrait");
+    } else {
+        $(this).addClass("landscape");
+    }
+});
+
+
+});
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready",onDeviceReady,false);
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        pictureSource=navigator.camera.PictureSourceType;
+        destinationType=navigator.camera.DestinationType;
+      
+   
+    }
+    function onBackKeyDown() 
+    {
+    }
+
+    // Called when a photo is successfully retrieved
+    //
+    function onPhotoDataSuccess(imageData) {
+       $(".circle2").css({"border-color": "#fff", 
+             "border-width":"2px", 
+             "border-style":"solid"});
+    
+       var largeImage="";
+      // Uncomment to view the image file URI
+      // console.log(imageURI);
+
+      // Get image handle
+      //
+      if(imgfirstt>0)
+      {
+      $('#first').attr('src',imageData);   
+    
+        imgfirstt=0;
+        check++;
+     
+     }
+    else  if(imgfirst>0)
+      {
+       $('#second').attr('src',imageData);   
+    
+    
+     imgfirst=0;
+      check++;
+     }
+    else  if(imgsecond>0)
+      {
+        $('#third').attr('src',imageData);   
+    
+    
+     imgsecond=0;
+    check++;
+     }
+    else  if(imgthird>0)
+      {
+       $('#fourth').attr('src',imageData);   
+    
+      check++;
+     }
+    
+    
+
+     
+     
+      
+    }
+
+    // Called when a photo is successfully retrieved
+    //
+    function onPhotoURISuccess(imageURI) {
+      var largeImage="";
+      // Uncomment to view the image file URI
+      // console.log(imageURI);
+
+      // Get image handle
+      //
+      if(imgfirstt>0)
+      {
+      
+    $('#first').attr('src',imageURI);   
+         imgfirstt=0;
+      check++;
+     }
+    else  if(imgfirst>0)
+      {
+      
+         $('#second').attr('src',imageURI); 
+    
+        imgfirst=0;
+      check++;
+     }
+    else  if(imgsecond>0)
+      {
+      
+     $('#third').attr('src',imageURI); 
+    
+     imgsecond=0;
+    check++;
+     }
+    else  if(imgthird>0)
+      {
+      
+    $('#fourth').attr('src',imageURI); 
+    
+        check++;
+     }
+
+    
+      imgid=imageURI;
+    
+    }
+
+    // A button will call this function
+    //
+   function capturePhoto() {
+         navigator.camera.getPicture(onPhotoDataSuccess, onFail, { 
+        quality:30 ,correctOrientation:false, encodingType: Camera.EncodingType.PNG, targetWidth: 1500,
+                targetHeight: 1500, destinationType: Camera.DestinationType.FILE_URI 
+    });
+    }
+
+    // A button will call this function
+    //
+    function capturePhotoEdit() {
+      // Take picture using device camera, allow edit, and retrieve image as base64-encoded string
+      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true,
+        destinationType: destinationType.DATA_URL });
+    }
+
+    // A button will call this function
+    //
+    function getPhoto(source) {
+    
+   
+      // Retrieve image file location from specified source
+      navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,correctOrientation:false, encodingType: Camera.EncodingType.PNG,
+        destinationType: destinationType.FILE_URI,
+        sourceType: source });
+    }
+
+    // Called if something bad happens.
+    //
+    function onFail(message) {
+      alert('Failed because: ' + message);
+    }
+
+
+  
+  
+  //for drag and drop elements
+  
+     $(function() {
+    $( "#first" ).draggable();
+    $( "#second" ).draggable();
+     $( "#third" ).draggable();
+    $( "#fourth" ).draggable();
+   /* $( "#droppable1" ).droppable({
+      drop: function( event, ui ) {
+         var draggable = ui.draggable;
+            var id = draggable.attr("id");
+           alert(id);
+      }
+    });*/
+  $("#droppable1" ).droppable({
+    containment: "#mycontainer",
+    drop: function(ev, ui) 
+    {
+  
+       
+       ui.draggable.parent().append($(this).children());
+
+        $(this).append(ui.draggable);
+
+        ui.draggable.css({
+            left:0,
+            top:0
+        });
+       
+    }
+});
+  
+    
+  
+  $("#droppable2" ).droppable
+  ({
+  containment: "#mycontainer",
+    drop: function(ev, ui) 
+    {
+          ui.draggable.parent().append($(this).children());
+
+        $(this).append(ui.draggable);
+
+        ui.draggable.css({
+            left:0,
+            top:0
+        });
+    }
+});
+  
+   $("#droppable3" ).droppable
+  ({
+  containment: "#mycontainer",
+    drop: function(ev, ui) 
+    {
+       // $(ui.draggable).detach().css({top:0,left:0}).appendTo(this);
+          ui.draggable.parent().append($(this).children());
+
+        $(this).append(ui.draggable);
+
+        ui.draggable.css({
+            left:0,
+            top:0
+        });
+    }
+});
+  
+   $("#droppable4" ).droppable
+  ({
+  containment: "#mycontainer",
+    drop: function(ev, ui) 
+    {
+        //$(ui.draggable).detach().css({top:0,left:0}).appendTo(this);
+           ui.draggable.parent().append($(this).children());
+
+        $(this).append(ui.draggable);
+
+        ui.draggable.css({
+            left:0,
+            top:0
+        });
+    }
+});
+  
+  });
+    </script>
+ 
+<style>
+
+  #draggable { width: 150px; height: 150px; padding: 0.5em; }
+  
+body
+{
+
+margin-left:0px;
+margin-right:0px;
+}
+
+.ui-mobile .ui-page {
+
+background: black;//-webkit-linear-gradient(top, #f4f3ff, rgba(93, 177, 223, 0.75));
+
+ }
+
+
+hr { margin-top:0px; color:#DADADA;}
+
+.circle1
+{
+border-radius:50% 50% 50% 50%;
+width:40px;
+height:40px;
+border: 4px solid #fff;
+left:45%;
+bottom: 10%;
+position:absolute;
+}
+.circle2
+{
+border-radius:50% 50% 50% 50%;
+width:30px;
+height:30px;
+border: 2px solid #ffffff;
+background-color:white;
+
+margin-top:3px;
+}
+ #img4{
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* Start with default styles for phone-sized devices */
+
+.container {
+    background-color: red;
+    float: left;
+    overflow: hidden;
+    width:22%;
+    height:10em;
+   
+    margin-left:2%
+}
+.container img {
+    display: block;
+    
+}
+.portrait img {
+    width: 100%;
+    
+}
+.landscape img {
+    height: 100%;
+    
+}
+.maincontainer {
+    background-color: red;
+    float: left;
+    overflow: hidden;
+    width:100%;
+    height:20em;
+   
+   
+}
+
+.container2 {
+    width: 100%;
+    height: 250px;
+    background-image: url("http://www.billboard.com/files/styles/promo_650/public/media/do-no-reuse-taylor-swift-the-beat-bb36-sarah-barlow-billboard-650.jpg");
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-color:#000;
+}
+.container3 
+{
+   
+    background-image: url("http://www.billboard.com/files/styles/promo_650/public/media/do-no-reuse-taylor-swift-the-beat-bb36-sarah-barlow-billboard-650.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+     float: left;
+     margin-left:5px;
+     position:relative;
+    
+}
+   
+@media only screen and (min-device-width : 768px) { /* 7" tablets */
+   
+}
+@media only screen and (min-device-width : 1024px) { /* 10" tablets and iPad */
+    
+}
+.bottom
+{
+
+width:100%;
+position:relative;
+
+clear:both;
+align:center;
+background-color:#000;
+
+}
+.collection
+{
+width:100%;
+
+clear:both;
+display: table-cell;
+vertical-align: middle;
+  text-align: center;
+}
+.cam
+{
+float:left;
+border:solid 2px #dadada;
+position:relative;
+margin-left:5px;
+}
+.closeicon
+{
+position:absolute;
+right:0px;
+}
+#droppable1 { width:100%; height: 200px;float:left;overflow:hidden;display: inline-block;}
+  #droppable2 { width: 90px; height: 90px;float:left;margin-left:5px; }
+  #droppable3 { width: 90px; height: 90px;float:left;margin-left:5px; }
+  #droppable4 { width: 90px; height: 90px;float:left;margin-left:5px; }
+  
+#first{width:100%;height:100%; -o-object-fit: contain;}
+#second{width:100%;height:100%}
+#third{width:100%;height:100%}
+#fourth{width:100%;height:100%}
+</style>
+
+    </head>
+    <body style="background-color:#000">
+     
+    
+     <!-- Header -->
+  <div style="width:100%;height:45px;position:fixed; top:0%; right:0%;z-index:100;background-color:#000;">
+  <div id="back" style="width:10%;height:45px;float:left"><img src="img/cancel_icon.png" style="margin-top:15px;margin-left:5px"/></div>
+  <div style="width:80%;height:45px;float:left;text-align:center"></div>
+  <div  id="postdata" style="width:10%;height:45px;float:left"><img  src="img/done_icon.png" align="right" style="margin-top:10px;margin-right:5px"/></div>
+   <hr size=1 />
+  
+   </div>
+   
+     <!-- Header End here -->
+
+
+
+
+
+ <div id="mycontainer" style="margin-top:45px"> 
+<div id="droppable1" >
+ <img id="first"  src="img/actress1.jpg" />
+</div>
+
+ <div style="width:100%;" class="collection">
+<div id="droppable2">
+  <img id="second"  src="img/actress2.jpg" />
+</div>
+<div id="droppable3" >
+  <img id="third"  src="img/actress1.jpg" />
+</div>
+<div id="droppable4" >
+  <img id="fourth"  src="img/actress2.jpg" />
+</div>
+ <div class="cam"><img id="img4" src="img/camera.png"  style="display:block;margin:auto auto;width:32px;height:32px" onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);" /></div>
+ 
+</div> 
+ 
+<div class="bottom">
+
+
+<div align="center" class=circle1>
+<div class=circle2></div>
+</div>
+
+
+</div>
+
+  
+   
+    </body>
+</html>

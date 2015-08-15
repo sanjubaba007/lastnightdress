@@ -1,0 +1,284 @@
+ #liked
+    {
+   border-style:solid;
+   border-width:1.5px;
+   border-color:#be4d66;
+   -webkit-border-radius:99px;
+   -moz-border-radius: 99px;
+   border-radius: 99px;
+
+    }
+    #unliked
+    {
+   border-style:solid;
+   border-width:1.5px;
+   border-color:#dadada;
+   -webkit-border-radius:99px;
+   -moz-border-radius: 99px;
+   border-radius: 99px;
+
+    }
+    body
+    {
+    font-size:14px;
+    text-transform:none;
+    background-color:white;
+    }
+    pre
+    {
+    font-size:12px;
+    }
+    #mydiv
+    {
+    width:100%;
+    height:100%;
+    background-color:white;
+
+    }
+    #subdiv
+    {
+    width:100%;
+    height:100%;
+    background-color:white;
+
+    }
+    .myimgdiv
+    {
+    height:150px;
+    width:150px;
+    float:left;
+   position:relative;
+    background-color:red;
+    margin:5px 5px 5px 5px;
+
+
+    }
+    #imgdiv
+    {
+    height:150px;
+    width:150px;
+    float:left;
+   position:relative;
+    background-color:red;
+    margin:5px 5px 5px 5px;
+
+    }
+    #imgdiv1
+    {
+    height:150px;
+    width:150px;
+    float:left;
+   position:relative;
+    background-color:red;
+    margin:5px 5px 5px 5px;
+
+    }
+     .bottom {
+   position:absolute;
+    bottom:2px;
+        padding:5px 5px 5px 5px;
+    background-color:#000000;
+    z-index:5;
+   background-color : transparent;
+}
+.top
+{
+  position:absolute;
+  z-index:100;
+	top:3px;
+	right:10px;
+	float:right;
+}
+.circle
+{
+border-radius:50% 50% 50% 50%;
+width:40px;
+height:40px;
+border: 2px solid #ffffff;
+
+
+}
+#dynamictable
+{
+    width:100%;
+    background-color:white;
+    margin-top:45px;
+    margin-bottom:60px;
+
+}
+a:hover
+            {
+				-o-box-shadow: 2px 2px 19px #fff;
+				-webkit-box-shadow: 2px 2px 19px #fff;
+				-moz-box-shadow: 2px 2px 19px #fff;
+			}
+
+			a:active
+			{
+				-o-box-shadow: 2px 2px 19px #2E9AFE;
+				-webkit-box-shadow: 2px 2px 19px #2E9AFE;
+				-moz-box-shadow: 2px 2px 19px #2E9AFE;
+			}
+         #like:hover
+            {
+				-o-box-shadow: 2px 2px 19px #fff;
+				-webkit-box-shadow: 2px 2px 19px #fff;
+				-moz-box-shadow: 2px 2px 19px #fff;
+			}
+
+			#like:active
+			{
+				-o-box-shadow: 2px 2px 19px #2E9AFE;
+				-webkit-box-shadow: 2px 2px 19px #2E9AFE;
+				-moz-box-shadow: 2px 2px 19px #2E9AFE;
+			}
+			.header-cont {
+    position:fixed; top:0%; right:0%;z-index:100;
+    width:100%;
+    background-color:#fff;
+
+}
+
+.ajax-loader {
+  position: absolute;
+    left: 0;
+    top: 0;
+    right: -32px; /* -1 * image width / 2 */
+    margin-top: -32px;  /* -1 * image height / 2 */
+    display: block;
+}
+#pageLoader
+{
+ z-index:100;
+   position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -32px; /* -1 * image width / 2 */
+  margin-top: -32px;
+
+}
+.ui-mobile .ui-page {
+
+background: white;//-webkit-linear-gradient(top, #f4f3ff, rgba(93, 177, 223, 0.75));
+
+ }
+ #footer
+{     background:rgba(0,0,0,0.8);
+
+    position:fixed;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    height:50px;
+    margin-bottom:0px;
+    width:100%;
+
+   }
+   .menudiv
+{
+
+width:20%;
+height:50px;
+float:left;
+position:relative;
+}
+ #menuimg {
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  margin:auto;
+}
+.imgcontainer
+{
+
+    background-image: url("http://www.billboard.com/files/styles/promo_650/public/media/do-no-reuse-taylor-swift-the-beat-bb36-sarah-barlow-billboard-650.jpg");
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-color:#000;
+
+
+}
+.ui-popup-container, .ui-popup {
+
+      max-width: 100% !important;
+
+     width: 100%;
+     height:100%;
+    padding: 0px;
+    margin-bottom:0px;
+
+
+    background:rgba(0,0,0,0.5);
+}
+.ui-dialog .ui-dialog-content {
+    padding: 0;
+}
+#sendimg{
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+#pacman {
+    width: 0;
+    height: 0;
+    border-right: 17px solid #BDBDBD;
+    border-top: 35px solid #BDBDBD;
+    border-left: 15px solid #BDBDBD;
+    border-bottom: 17px solid transparent;
+    position:absolute;
+
+	z-index:100;
+	top:0px;
+	right:10px;
+	float:right;
+}
+.swipeicon
+{
+  width:13px;
+  height:13px;
+}
+#header
+{
+    width: 100%;
+    height: 40px;
+    background-color:#be4d66;
+    //box-shadow: 4px 4px 4px #888888;
+    clear:both;
+}
+.fulldiv
+{
+  position:fixed;
+    padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+
+    width: 100%;
+    height: 100%;
+  background:rgba(248,248,248,0.5);
+    z-index:1000;
+    display: none;
+}
+#mydiv {
+    width: 300px;
+    height: 150px;
+    background-color: #fff;
+    box-shadow: 2px 2px 2px #888888;
+position:absolute;
+left: 50%;
+   top: 50%;
+   transform: translate(-50%,-50%);
+
+}
+.ui-focus {
+ -moz-box-shadow: none !important;
+ -webkit-box-shadow: none !important;
+ box-shadow: none !important;
+}

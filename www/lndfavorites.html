@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+       
+        <title>Hello World</title>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="js/jquery.js"></script>
+    	
+	<script type="text/javascript" charset="utf-8">
+
+    // Wait for device API libraries to load
+    //
+    function onLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        // Register the event listener
+		
+		$( document ).ready(function() {
+
+//finding device width
+       var width = $(window).width();
+  
+       var w=width/3-6;
+   var i=0,size;
+    size=localStorage.getItem("count");
+    if(size!=null)
+    {
+    for(i=0;i<=size;i++)
+    {
+       var cars = JSON.parse(localStorage["mycars"+i]);
+    //   alert(cars[0]+cars[1]+cars[2]);
+    if(cars[0]!='')
+    {
+     var mydivid="imgdiv"+i;
+     
+     $("#mydiv").append($('<div>',{class:'imgcontainer',id:mydivid}));
+ $("#"+mydivid).width(w).height(w);
+
+$("#"+mydivid).css("background-image","url("+cars[1]+")");
+     
+     //$("#"+mydivid).prepend($('<img>',{id:'theImg'+i,src:'img/actress1.jpg',width:'100%',height:'100%'}));
+     //$("#"+mydivid).prepend('<img src="' + cars[1] + '"   style="width:100%;height:100%" />');
+// $("#"+mydivid).css("background-image",url("+car[1]+"));
+
+/*$("#mydiv").append($('<div>',{class:'imgcontainer',id:mydivid}));
+     $("#"+mydivid).width(w).height(w);
+     $("#"+mydivid).css("background-image","url("+car[1]+")");*/
+     
+
+     $("#"+mydivid).prepend($('<img>',{id:i,class:'top'+i,src:'img/close_button.png',style:'position:absolute;right:0px'}));
+     $("#"+mydivid).prepend($('<p>',{class:'bottom',id:'p'+i}));
+     $("#p"+i).text("$"+cars[2]); 
+   
+    $("body").on("click", ".top"+i, function (e) {
+		//$(this).parent("div").remove();
+	 $("#imgdiv"+e.target.id).remove();
+	var pos=e.target.id;
+	//alert(e.target.id);
+	var cars = JSON.parse(localStorage["mycars"+pos]);
+	var mycars = new Array();
+mycars[0] ='';
+mycars[1] ='';
+mycars[2] ='';
+localStorage["mycars"+pos] = JSON.stringify(mycars);
+localStorage.removeItem(cars[0]);
+//alert(cars[0]);	
+	});
+    
+    }
+    
+    
+    }
+  }  
+   
+   
+   /*var i;
+    for (i = 0; i < 5; i++) {
+      var mydivid="imgdiv"+i;
+     
+     $("#mydiv").append($('<div>',{class:'myimgdiv',id:mydivid}));
+     $("#"+mydivid).prepend($('<img>',{id:'theImg'+i,src:'img/actress1.jpg',width:'100%',height:'100%'}));
+   
+     $("#"+mydivid).prepend($('<img>',{id:i,class:'top'+i,src:'img/close_button.png',style:'position:absolute;right:0px'}));
+     $("#"+mydivid).prepend($('<p>',{class:'bottom',id:'p'+i}));
+     $("#p"+i).text("$500"); 
+   
+    $("body").on("click", ".top"+i, function (e) {
+		//$(this).parent("div").remove();
+	 $("#imgdiv"+e.target.id).remove();
+	alert(e.target.id);
+	var cars = JSON.parse(localStorage["mycars"+0]);
+	var mycars = new Array();
+mycars[0] ='';
+mycars[1] ='';
+mycars[2] ='';
+localStorage["mycars"+0] = JSON.stringify(mycars);
+localStorage.removeItem(cars[0]);
+alert(cars[0]);	
+	});
+    
+     }*/
+      
+      //home event
+     $("#home").on("click", function() {
+     $(this).css("background-color", "#000");
+   
+    location.href = "../www/whathappeningonlnd.html";
+   
+    
+});
+//lnd event
+     $("#lnd").on("click", function() {
+    $(this).css("background-color", "#000");
+    location.href = "../www/listnightdressesview.html";
+   
+    
+});
+
+//camera event
+     $("#camera").on("click", function() {
+    $(this).css("background-color", "#be4d66");
+    location.href = "../www/instructionpage.html";
+   
+    
+});
+
+     //inbox event
+     $("#inbox").on("click", function() {
+    $(this).css("background-color", "#000");
+    location.href = "../www/inbox2.html";
+   
+    
+});
+   
+   //profile event
+     $("#profile").on("click", function() {
+    $(this).css("background-color", "#000");
+    location.href = "../www/mainprofileview.html";
+   
+    
+});
+     
+     //event to go back
+   $("#back").on("click", function() {
+    $("#back").css('background-color','#be4d66');
+  
+     history.go(0);
+    navigator.app.backHistory(); 
+
+});   
+       });
+    
+       // document.addEventListener("backbutton", onBackKeyDown, false);
+    }
+
+    // Handle the back button
+    //
+    function onBackKeyDown() {
+    	alert('device backbutton pressed');
+    
+	}
+
+    </script>
+    <style>
+    body
+    {
+    position:relative;
+    margin-left:0px;
+    margin-top:0px;
+    margin-right:0px;
+    }
+    #mydiv
+    {
+    width:100%;
+    height:100%;
+    background-color:white;
+    margin-top:50px;
+    }
+    .myimgdiv
+    {
+     height:10em;
+    width:32%;
+    float:left;
+   position:relative;
+    
+    margin-left:1%;
+    margin-top:0%;
+    
+    
+    }
+   
+   
+     .bottom {
+   position:absolute;
+    bottom:-12px;
+    text-align:left;
+    padding:4px 4px 4px 4px;
+   background:rgba(0,0,0,0.4);
+    color:#fff;
+    font-size:13px;
+    font-family:ppfont;
+}
+.top
+{
+  position:absolute;
+ top:0px;
+}
+#footer
+{     background:rgba(0,0,0,0.7);
+     
+    position:fixed;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    height:50px;
+    margin-bottom:0px;
+    width:100%;
+    
+   }
+  #menuimg {
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  margin:auto;
+} 
+.menudiv
+{
+
+width:20%;
+height:50px;
+float:left;
+position:relative;	
+}
+.imgcontainer
+{
+  
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+     float: left;
+   
+     position:relative;
+     margin:3px 3px 3px 3px;
+     background-color:#000;
+     
+    
+}
+@font-face {
+    font-family:ppfont;
+    src: url(fonts/AvenirNextLTPro-Regular.otf);
+}
+@font-face {
+    font-family:hfont;
+    src: url(fonts/AvenirNextLTPro-Bold.otf);
+}
+    </style>
+    </head>
+    <body onload="onLoad()">
+    <!-- Header -->
+  <div style="width:100%;height:45px;position:fixed; top:0%; right:0%;z-index:100;background-color:#fff;"><div id="back" style="width:10%;height:45px;float:left"><img src="img/back_arrow.png" style="margin-top:10px;margin-left:5px;width:25px;height:25px"/></div><div style="width:80%;height:45px;float:left;background-color:#fff"><h1 align="center" style="text-align:center;margin-top:13px;font-size:18px;font-family:hfont;font-color:#3c4653">Favorites</h1></div><div style="width:10%;height:45px;background-color:#fff;float:left"><img src="img/rating_icon.png" style="margin-top:12px;margin-right:5px;width:22px;height:22px"/></div>
+   <hr size=1 />
+   </div> 
+   </div> 
+        <div id="mydiv">
+         
+          
+          </div>
+      
+    <div id="footer">
+     <div id="home" align="center" id="home" class="menudiv">
+     <img  src="img/home_gray.png" id="menuimg" style="width:32px;height:32px"/> 
+     </div>
+     <div id="lnd" align="center" class="menudiv">
+     <img src="img/shopping.png" id="menuimg" style="width:32px;height:32px"/> 
+     </div>
+     <div align="center" style="background: -webkit-linear-gradient(left, #612045 , #d87976);" id="camera" class="menudiv">
+     <img src="img/camera.png" id="menuimg" style="width:32px;height:32px"/> 
+     </div>
+     <div align="center" id="inbox" class="menudiv">
+     <img src="img/message_icon_gray.png" id="menuimg" style="width:32px;height:32px"/> 
+     </div>
+     <div id="profile" align="center" class="menudiv">
+     <img src="img/profile_gray.png" id="menuimg" style="width:32px;height:32px"/> 
+     </div>
+    
+       </div>
+       
+    </body>
+</html>

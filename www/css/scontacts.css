@@ -1,0 +1,73 @@
+
+  body
+  {
+    background-color:aqua;
+    margin-left:0px;
+    margin-top:0px;
+  }
+.ui-page .ui-header {
+    background: #fff;
+    
+}
+#fm{
+padding-top:10px;
+margin-top:45px;
+}
+#head{
+background: #be4d66;
+height:3em;
+}
+p
+{
+
+color:#fff;
+line-height:3em;
+}
+#dynamictable
+{
+    width:100%;
+    background-color:white;
+    font-size:14px;
+   
+}
+input
+
+{
+  width:100%;
+  
+}
+.ui-mobile .ui-page {
+
+background: white;
+
+ }
+ 
+ hr { margin-top:0px;margin-bottom:0px; color:#DADADA;}
+ .ajax-loader {
+  position: absolute;
+    left: 0;
+    top: 0;
+    right: -32px; /* -1 * image width / 2 */
+    margin-top: -32px;  /* -1 * image height / 2 */
+    display: block;
+}
+#pageLoader
+{
+ z-index:100;
+   position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -32px; /* -1 * image width / 2 */
+  margin-top: -32px;
+  
+}
+.ui-focus {
+ -moz-box-shadow: none !important;
+ -webkit-box-shadow: none !important;
+ box-shadow: none !important;
+}
+.ui-input-text {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+   box-shadow: none;
+}

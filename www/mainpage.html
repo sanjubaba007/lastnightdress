@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        
+            <script type="text/javascript" src="cordova.js"></script>
+      <script type="text/javascript" src="js/openfb.js"></script>
+      
+        
+    
+                <script src="myjqmjs/jquery.js"></script>
+        
+	   
+
+<script>
+ openFB.init({appId: '429050477261877', tokenStore: window.localStorage});
+
+    $(document).ready(function(){
+    $("#email").click(function(){
+       location.href = "../www/createprofile.html";
+    });
+     $("#loginpage").click(function(){
+     $("#loginpage").css("background-color","#dadada");
+       location.href = "../www/loginpage.html";
+    });
+});
+
+$(document).ready(function(){
+    $("#fb").click(function(){
+   //    location.href = "../www/createprofile.html";
+    login();
+    });
+     });
+
+function onLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        // Register the event listener
+        document.addEventListener("backbutton", onBackKeyDown, false);
+       
+    }
+
+    // Handle the back button
+    //
+    function onBackKeyDown() {
+     
+}
+
+ function login() {
+        openFB.login(
+                function(response) {
+                    if(response.status === 'connected') {
+                        alert('Facebook login succeeded');
+                    getInfo();
+                    } else {
+                        alert('Facebook login failed: ' + response.error);
+                    }
+                }, {scope: 'email'});
+    }
+
+function getInfo() {
+        openFB.api({
+            path: '/me',
+            success: function(data) {
+             
+          //  lnduserfb(data);
+             localStorage.setItem("fbuname",data.name);
+             localStorage.setItem("fbemail",data.email);
+             
+              location.href = "../www/createprofile.html";
+            },
+            error: errorHandler});
+    }
+
+    function errorHandler(error) {
+        alert(error.message);
+    }
+
+//lnd user registration
+    function lnduserfb(da)
+    {
+    
+     var request = $.ajax({
+    type: 'POST',
+    timeout: 5000,
+    url: 'http://52.74.70.40/lnd/lndusers.php',
+    data: {uname:da.id,email:da.email,rqid:4,imgurl:'http://graph.facebook.com/' + da.id + '/picture?type=large'} })
+    .done(function(data) {  
+    var json = JSON.parse(data);
+    localStorage.setItem("uname",json.uname);
+    localStorage.setItem("url",json.imageurl);
+    
+     location.href = "../www/createprofile.html"; 
+     
+    })
+    .fail(function() { alert("error"); })
+    .always(function() { });
+
+    }
+</script>
+<style>
+body
+{
+  text-transform: none;
+}
+.circle
+{
+border-radius:50% 50% 50% 50%;
+width:40px;
+height:40px;
+border:none;
+margin-top:2px;
+
+}
+#mainbottom
+{
+   position:fixed; 
+    bottom:0%;
+    width:100%; 
+    opacity: 1;
+    
+ }
+#fb
+{
+   
+position:relative;
+min-height:30px;
+ padding:6px 6px;
+ background: -webkit-linear-gradient(left, #612045 , #d87976); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, #612045 , #d87976); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, #612045 , #d87976); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, #612045 , #d87976); /* Standard syntax */
+}
+#login
+{
+   
+position:relative;
+min-height:30px;
+ padding:8px 8px;
+ background: -webkit-linear-gradient(left, #612045 , #d87976); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, #612045 , #d87976); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, #612045 , #d87976); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, #612045 , #d87976); /* Standard syntax */
+}
+#email
+{
+position:relative;
+min-height:30px;
+background-color:#e8e9eb;
+padding:6px 6px;
+}
+
+div p
+{
+font-size:14px;
+color:white;
+text-align:center;
+width:100%;
+}
+
+
+#centerdiv
+{
+
+    width: 100%;
+    height: 250px;
+    
+
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0%;
+    right: 0;
+
+    margin: auto;
+}
+#centerdiv span
+{
+color:#d87976;
+font-size:250%;
+
+
+}
+
+			.divClass:hover{
+				//-o-box-shadow: 2px 2px 19px #CCC;
+				//-webkit-box-shadow: 2px 2px 19px #CCC;
+				//-moz-box-shadow: 2px 2px 19px #CCC;
+			}
+			
+			.divClass:active{
+				//-o-box-shadow: 2px 2px 19px #2E9AFE;
+				//-webkit-box-shadow: 2px 2px 19px #2E9AFE;
+				//-moz-box-shadow: 2px 2px 19px #2E9AFE;
+			}
+			 .ui-popup-container, .ui-popup {
+   
+      max-width: 100% !important;
+  
+     width: 95%;
+    padding: 0;
+}
+
+        @font-face {
+    font-family:ppfont;
+    src: url(fonts/AvenirNextLTPro-Regular.otf);
+}
+@font-face {
+    font-family:hfont;
+    src: url(fonts/AvenirNextLTPro-Bold.otf);
+}
+@font-face {
+    font-family:unfont;
+    src: url(fonts/AvenirNextLTPro-Demi.otf);
+}
+@font-face {
+    font-family:headfont;
+    src: url(fonts/AkerBryggeDisplay.ttf);
+}
+     
+     span
+     {
+     font-family: headfont;    
+     }   
+        
+</style>
+
+    </head>
+    <body onload="onLoad()">
+    <table  style="position:absolute;top:2px;right:5px;background-color:#fff">     
+  <tr><td> <img id="loginpage" src="img/login_icon.png" style="width:25px;height:25px"/></td></tr>
+  <tr><td align="top"><label style="font-family:ppfont">Login</label></td></tr>
+  </table>
+  <div id=centerdiv>
+ <div style="width:65%;position: absolute; top:0; bottom: 0;left: 0;right: 0;margin: auto;">
+  <span>LAST</span>
+  <span>NIGHT'S</span>
+  <span>DRESS <img src="img/logo.png" class="circle" style="margin-top:5px"/></span>
+  <br/>
+  
+  <p style="font-size:14px;color:#000000;float:left;clear:both;text-align:left;font-family:ppfont">Where fashionistas blossom into corporate queens</p>
+  
+  </div>
+  
+  
+  </div>  
+
+<div id=mainbottom>     
+
+
+<div id=email class="divClass">
+<p style="font-size:14px;color:#6E6E6E;text-align:center;width:100%;font-family:ppfont;line-height:12px">Sign up with email</p>
+
+</div> 
+
+<div id="fb" class="divClass">
+<table align="center"><tr><td align="middle"><p style="font-family:ppfont;line-height:8px">Continue with Facebook </p></td><td align="middle"><img src="img/right_arrow.png" style="width:18px;height:18px" /> </td></tr></table>
+
+
+</div> 
+</div>
+
+ 
+
+    </body>
+</html>

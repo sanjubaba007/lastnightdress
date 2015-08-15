@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        
+          <script type="text/javascript" src="cordova.js"></script>
+       
+       <link rel="stylesheet" type="text/css" href="css/jquery.mobile.flatui.css" />
+  <link rel="stylesheet" type="text/css" href="css/custom.css" />
+  <script src="js/jquery.js"></script>
+  <script src="js/jquery.mobile-1.4.0-rc.1.js"></script>
+	  
+       
+  
+<script type="text/javascript" charset="utf-8">
+
+$(document).ready(function(){
+   
+   //setting event
+     $("#back").on("click", function() {
+    
+    
+  
+    $("#back").css("background-color", "#be4d66");
+    window.history.back();
+    
+});
+});
+
+    // Wait for device API libraries to load
+    //
+    function onLoad() {
+    
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        // Register the event listener
+		getData();
+	//	document.addEventListener("backbutton", onBackKeyDown, false);
+    //setup();
+     }
+
+   function onBackKeyDown() {
+ 
+    }
+function setup(result)
+{
+$('#pageLoader').hide();
+
+
+//alert(result);
+  var obj = jQuery.parseJSON( result );
+if(obj.data.length==0)
+alert("you don't have any follower");
+var i=0;
+
+$.each(obj.data, function(idx, obj) 
+{
+
+
+
+$("#dynamictable").append($('<div>',{class:'mydiv',id:'mydivd'+i,style:'margin-top:-5px;height:40px'}));
+$('#mydivd'+i).append($('<div>',{id:'mydiva'+i,style:'width:15%;float:left;'}));
+
+
+$('#mydiva'+i).append('<img src="' +obj.user_pic + '" align="center" class="circle"/>');
+
+// $("#mydiva"+i).append($('<div>',{class:'circle',id:'mypic'+i}));
+     
+//     $("#mypic"+i).css("background-image","url("+obj.user_pic+")");
+     
+
+$('#mydivd'+i).append($('<div>',{id:'mydivb'+i,style:'width:55%;float:left;position:relative;'}));
+
+
+$("#mydivb"+i).append($('<label>',{id:i,class:'test'+i,style:'text-transform: capitalize;color:#be4d66;font-size:16px;text-decoration:none;float:left;padding-top:10px;width:100%;padding-left:10px;overflow:hidden;font-family:unfont'}));
+$("#"+i).text(obj.uname);
+
+$("#mydivd"+i).append($('<div>',{id:'mydive'+i,style:'float:left;width:30%;margin-top:3px'}));
+$("#mydive"+i).append($('<span>',{id:obj.id,class:"acbtn"+i, style:'float:right;margin-right:5px;color:#be4d66;background-color:#fff;text-align:center;position:relative;top:3px;padding-left:15px;padding-right:15px;padding-top:5px;padding-bottom:5px;-webkit-border-radius: 99px;-moz-border-radius: 99px;border-radius: 99px;border:1px solid #be4d66;'}));
+if(obj.check==1)
+{
+$("#"+obj.id).text("Following");
+$("#"+obj.id).css('border-color', '#dadada');
+$("#"+obj.id).css('color', '#dadada');
+}	
+else
+{
+$("#"+obj.id).text("Follow +");
+$("#"+obj.id).css('border-color', '#be4d66');
+$("#"+obj.id).css('color', '#be4d66');
+	
+}
+$("#dynamictable").append($('<hr>',{size:'1',style:'width:97%'}));
+
+$("body").on("click", ".acbtn"+i, function (e) 
+    {
+	  
+     
+    followun(e.target.id);
+     	});
+i++;
+});
+
+}
+function followun(cls)
+    {
+   var un= localStorage.getItem("uname");
+   var request = $.ajax({
+    type: 'POST',
+    timeout: 5000,
+    url: 'http://52.74.70.40/lnd/followfollowing.php',
+    data: {uid:un,fid:cls,rqid:2} })
+    .done(function(data) {  
+    
+  var json = JSON.parse(data);
+  
+    if (json.status == true)
+	{
+	if(json.value==1)
+	{
+    $("#"+cls).css('border-color', '#be4d66');
+	$("#"+cls).css('color', '#be4d66');
+	
+	$('#'+cls).html("Follow +");
+	alert(json.message);
+	}
+	else
+	{
+	$("#"+cls).css('border-color', '#dadada');
+	$("#"+cls).css('color', '#dadada');
+	
+	
+	$('#'+cls).html("Following");
+	alert(json.message);
+	
+	}
+	}
+
+	else
+	{
+	alert("not liked");
+	
+	}
+	
+    })
+    .fail(function() { alert("unable to load data "); })
+    .always(function() { });
+ 
+    }
+
+
+
+function getData()
+ {
+ var un= localStorage.getItem("uname");
+  var request = $.ajax({
+    type: 'POST',
+    timeout: 5000,
+    url: 'http://52.74.70.40/lnd/followfollowing.php',
+    data: {uid:un,rqid:1} })
+    .done(function(data) {  
+   //alert(data);
+   setup(data); 
+
+	
+    })
+    .fail(function() { alert("unable to load data "); })
+    .always(function() { });
+ 
+}
+
+    </script>
+ 
+ 
+<style>
+.delipckup
+{
+
+width:90px;
+height:25px;
+-webkit-border-radius: 99px;
+-moz-border-radius: 99px;
+border-radius: 99px;
+border:1px solid #be4d66;
+background-color:#fff;
+}
+body
+{
+font-size:14px;
+    text-transform:none;
+}
+#dynamictable
+{
+    width:100%;
+    background-color:white;
+    margin-top:53px;
+    
+}
+.circle
+{
+border-radius:50% 50% 50% 50%;
+width:40px;
+height:40px;
+border: 2px solid #ffffff;
+margin-left:5px;
+
+}
+.mydiv
+    {
+    width:100%;
+    height:100%;
+    background-color:white;
+    
+    }
+#pageLoader
+{
+ 
+   position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -32px; /* -1 * image width / 2 */
+  margin-top: -32px;
+  
+}
+#div
+{
+ width: 100%;
+    height: 250px;
+    
+
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0%;
+    right: 0;
+
+    margin: auto;
+    background-color:#abc123;
+}
+.ajax-loader {
+  position: absolute;
+    left: 0;
+    top: 0;
+    right: -32px; /* -1 * image width / 2 */
+    margin-top: -32px;  /* -1 * image height / 2 */
+    display: block;
+}
+.ui-mobile .ui-page {
+
+background: white;//-webkit-linear-gradient(top, #f4f3ff, rgba(93, 177, 223, 0.75));
+
+ }
+ 	.header-cont {
+    position:fixed; top:0%; right:0%;z-index:100;
+    width:100%;
+    background-color:#fff;
+     
+}
+
+@media (min-width: 700px) 
+{
+           p
+			{
+			font-size:1em;
+			}
+			
+			#fontstyle
+{
+font-weight:bold;
+font-size:20px;
+padding-top:20px;
+width:100%;
+line-height:10px;
+margin:0;
+}
+.circle
+{
+border-radius:50% 50% 50% 50%;
+width:55px;
+height:55px;
+border: 2px solid #ffffff;
+ background-size: contain;
+ background-repeat: no-repeat;
+  background-position: 50% 50%;
+ position:relative;
+
+}
+    @font-face {
+    font-family:ppfont;
+    src: url(fonts/AvenirNextLTPro-Regular.otf);
+}
+@font-face {
+    font-family:hfont;
+    src: url(fonts/AvenirNextLTPro-Bold.otf);
+}
+@font-face {
+    font-family:unfont;
+    src: url(fonts/AvenirNextLTPro-Demi.otf);
+}   
+
+}
+
+</style>
+
+    </head>
+    <body  onload="onLoad()">
+    <!-- Header -->
+ <div style="width:100%;height:45px;position:fixed; top:0%; right:0%;z-index:100;background-color:#fff;"><div id="back" style="width:10%;height:45px;float:left"><img src="img/back_arrow.png" style="margin-top:10px;margin-left:5px;width:25px;height:25px"/></div><div style="width:80%;height:45px;float:left;background-color:#fff"><h1 align="center" style="margin-top:12px;font-size:18px;font-family:hfont">Followers</label></div><div style="width:10%;height:45px;background-color:#fff;float:left"></div>
+   <hr size=1 />
+   </div> 
+     <div id="#div">
+       <img src="img/dataload.gif" id=pageLoader class=ajax-loader/> 
+ </div>
+     <div id="dynamictable">
+ 
+     
+    
+</div>
+
+    </body>
+</html>

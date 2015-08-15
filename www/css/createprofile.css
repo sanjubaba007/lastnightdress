@@ -1,0 +1,192 @@
+.circle
+{
+border-radius:50% 50% 50% 50%;
+width:80px;
+height:80px;
+border: 1px solid #ffffff;
+object-fit:cover;
+}
+
+div.container4 {
+    position:absolute ;
+    width:100%;
+    height:30px;
+    background-color:#be4d66;
+    top:0px;
+    z-index:5;
+    padding-top:15px;
+
+
+    }
+div.container4 p
+{
+
+
+font-size:14px;
+color:white;
+text-align:center;
+
+
+width:100%;
+}
+div
+{
+width:100%;
+}
+#main{
+  position:relative;
+
+  background-color:#fff;
+
+
+}
+#fix{
+  position:relative;
+
+  top:-35px;
+
+
+}
+#addphoto
+{
+background-color:#df8b86;
+min-height:120px;
+ background: -webkit-linear-gradient(left, #612045 , #d87976); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, #612045 , #d87976); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, #612045 , #d87976); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, #612045 , #d87976); /* Standard syntax */
+position:relative;
+margin-top:40px;
+width:100%
+}
+#mypic
+{
+  margin: auto;
+       position: absolute;
+       top: 0;
+       left: 0;
+       bottom: 0;
+       right: 0;
+       width:80px;
+height:80px;
+}
+#footer
+{
+    position:fixed;
+    bottom:0px;
+    left:0px;
+    right:0px;
+
+    margin-bottom:0px;
+    width:100%;
+   }
+   .ui-popup-container, .ui-popup {
+
+      max-width: 100% !important;
+
+     width: 100%;
+    padding: 0px;
+    margin-bottom:0px;
+   height:100%;
+    background:rgba(0,0,0,0.5);
+    margin-left:-1px;
+
+}
+.ui-dialog .ui-dialog-content {
+    padding: 0;
+}
+ h5
+{
+    margin:auto;
+    line-height:45px;
+    vertical-align:middle;
+    width:100%;
+    color:#000;
+    font-size:16px;
+
+}
+
+
+p
+{
+    margin:0;
+    padding-left:11%;
+    vertical-align:middle;
+    display:table-cell;
+   color:#585858;
+   font-size:14px;
+}
+#head
+{
+    margin:0;
+    vertical-align:middle;
+    display:table-cell;
+   color:#9ea6b0;
+  width:100%;
+  height:60px;
+
+
+}
+#myPopup2
+{
+font-size:14px;
+}
+hr { margin-top:0px;margin-bottom:0px; color:#DADADA;}
+.ajax-loader {
+  position: absolute;
+    left: 0;
+    top: 0;
+    right: -32px; /* -1 * image width / 2 */
+    margin-top: -32px;  /* -1 * image height / 2 */
+    display: block;
+}
+#pageLoader
+{
+ z-index:100;
+   position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -32px; /* -1 * image width / 2 */
+  margin-top: -32px;
+
+}
+.ui-popup .ui-content {
+    height: 150px !important;
+    padding-bottom:0px;
+    margin-bottom:0px;
+}
+.ui-input-text {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+   box-shadow: none;
+}
+.ui-focus {
+ -moz-box-shadow: none !important;
+ -webkit-box-shadow: none !important;
+ box-shadow: none !important;
+}
+.fulldiv
+{
+  position:fixed;
+    padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+
+    width: 100%;
+    height: 100%;
+  background:rgba(248,248,248,0.5);
+    z-index:1000;
+    display: none;
+}
+#mydiv {
+    width: 300px;
+    height: 150px;
+    background-color: #fff;
+    box-shadow: 2px 2px 2px #888888;
+position:relative;
+left: 50%;
+   top: 50%;
+   transform: translate(-50%,-50%);
+}

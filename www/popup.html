@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("#cancel").click(function(){
+       
+$( "#myPopup" ).popup( "close" );
+
+
+    });
+});
+</script>
+</head>
+<body>
+
+<div data-role="page">
+  <div data-role="header">
+    <h1>Welcome To My Homepage</h1>
+  </div>
+
+  <div data-role="main" class="ui-content" data-corners="false">
+    <a href="#myPopup" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all">Show Popup</a>
+    
+    <div data-role="popup" id="myPopup" style="width:100%" data-corners="false" data-overlay-theme="a">
+      <p style="padding-left:20px;padding-right:20px; padding-top:10px; padding-bottom:10px;width:100%;font-size:18px;color:#000;font-weight:bold">Bank allows in-app purchases</p>
+    <br/>
+    <br/>
+    <div padding-left:10px;padding-right:10px; padding-top:10px; padding-bottom:10px;width:100%;font-size:20px">
+  <center>
+    <p style="line-height:5px">How to unlock ?</p>
+    <p style="line-height:5px">You need a four star rating or higher</p>
+    </center>
+    </div>
+    <div class="ui-grid-a" style="margin-bottom:-8px">
+    <div class="ui-block-a"><button type="submit" id="cancel" data-theme="c" data-corners="false">Cancel</button></div>
+    <div class="ui-block-b"><button type="submit" data-theme="c" data-corners="false">Know More</button></div>
+</div>
+    </div>
+  </div>
+
+ 
+</div> 
+
+</body>
+</html>

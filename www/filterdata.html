@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    
+    <style>
+        @font-face {
+    font-family:ppfont;
+    src: url(fonts/AvenirNextLTPro-Regular.otf);
+}
+@font-face {
+    font-family:hfont;
+    src: url(fonts/AvenirNextLTPro-Bold.otf);
+}
+@font-face {
+    font-family:unfont;
+    src: url(fonts/AvenirNextLTPro-Demi.otf);
+}
+        </style>
+    </head>
+    <body style="background-color:#222427;width:100%;height:100%">
+    <div data-role="page">
+    
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+       
+       <link href="css/jquery-ui.css" rel="stylesheet">
+        <link href="css/filterdata.css" rel="stylesheet">
+      <script src="js/jquery.js"></script>
+      <script src="js/jquery-ui.js"></script>
+      <script src="js/jquery.ui.touch-punch.js"></script>
+      
+     <script type="text/javascript" src="cordova.js"></script>
+      <script src="js/filterdata.js"></script>
+      
+    
+    
+<div style="width:100%;height:100%;background-color:white">
+  <!-- Header -->
+     
+  <div style="width:100%;height:45px;position:fixed; top:0%; right:0%;z-index:100;background-color:#fff;"><div id="back" style="width:10%;height:45px;float:left"><img src="img/back_arrow.png" style="margin-top:10px;margin-left:5px;width:25px;height:25px"/></div><div style="width:75%;height:45px;float:left;background-color:#fff"><h5 align="center" style="margin-top:15px;font-weight:bold;font-size:18px;font-family:hfont">Search filter</h5></div><div id="reset" style="width:15%;height:45px;background-color:#fff;float:left"><h5 align="center" style="margin-top:15px;font-weight:bold;font-size:14px;color:#be4d66;margin-right:2px;font-family:ppfont">Reset</h5></div>
+   <hr size=1 />
+   </div> 
+ 
+ <div id="brk" style="margin-top:45px"></div>
+ 
+   
+<div class="ui-widget">
+ 
+<table id="sh"><tr><td align="center"><img src="img/search_icon.png" style="width:16px;height:16px;foat:left" /></td><td><input type="text" class="search-box" id="tags" placeholder="Type your search here" style="width:96.5%;height:40px;border:none; padding-left:10px;font-size:14px;background:transparent;float:left"></td></tr></table>
+ 
+</div>
+ 
+ 
+ </div>
+  <!-- description area -->
+  <div style="width:100%;">
+ 
+ <center>
+ 
+   <h4 align="left"  class="tag">Distance <div style="float:right"><span style="color:#fff;" id="valu">0mi-100mi</span></div></h4>
+  <div style="width:75%;height:40px;">
+  <br>
+   <div id="slider1"></div>
+   <div style="width:50%;float:left;margin-top:10px">
+  </div>
+    </div>
+    <h4 align="left"   class="tag">Price <div style="float:right"><span style="color:#fff;" id="val">$0 - $1000+</span></div></h4>
+  <div style="width:75%;height:40px;">
+  <br>
+   <div id="slider"></div>
+   <div style="width:50%;float:left;margin-top:10px">
+  </div>
+     </div>
+        <!--size -->
+   <h4 align="left"   class="tag">Size</h4>
+  <div style="background-color:#000000;width:75%;" class="shadow">
+   <div id="size1" class="sbox">
+       <p style="color:white">2XS</H1>
+  
+  </div>
+     <div id="size2" class="sbox">
+       <p style="color:white">XS</H1>
+  
+  </div>
+       <div id="size3" class="sbox">
+       <p style="color:white">S</H1>
+  
+  </div>
+      <div id="size4" class="sbox">
+       <p style="color:white">M</H1>
+  
+  </div>
+       <div id="size5" class="sbox">
+       <p style="color:white">L</H1>
+  
+  </div>
+      <div id="size6" class="sbox">
+       <p style="color:white">XL</H1>
+  
+  </div>
+       <div id="size7" class="sbox">
+       <p style="color:white">2XL</H1>
+  
+      </div>
+  
+  <div id="size8" class="sbox">
+       <p style="color:white">All</H1>
+  
+      </div>
+  
+  
+  </div>
+  
+     
+          <br/>
+
+     <br/><br/>     <br/>
+     <br/>
+     <!--Length -->
+   <h4 align="left" class="tag">Length</h4>
+  <div style="background-color:#000000;width:75%;" >
+   <div id="short" class="cbox">
+       <p style="color:white">Short</H1>
+  
+  </div>
+     <div id="long" class="cbox">
+       <p style="color:white">Long</H1>
+  
+  </div>
+       <div id="sall" class="cbox">
+       <p style="color:white">All</H1>
+      </div>
+      </div>
+  
+  
+ 
+ <br/>
+
+     <br/><br/>  
+     
+ <!--business type -->
+   <h4 align="left" class="tag">Business</h4>
+  <div style="background-color:#000000;width:75%;" >
+   <div id="private" class="cbox">
+       <p style="color:white">Private</H1>
+  
+  </div>
+     <div id="shop" class="cbox">
+       <p style="color:white">Shop</H1>
+  
+  </div>
+       <div id="busiall" class="cbox">
+       <p style="color:white">All</H1>
+      </div>
+      </div>
+  
+  
+ 
+ <br/>
+
+     <br/><br/>  
+        
+     <!--Color -->
+   <h4 align="left"  class="tag" >Color</h4>
+  <div style="background-color:#000000;width:75%;">
+   <div id="black" class="cbox">
+       <p style="color:white">Black</H1>
+  
+
+      </div>
+  <div id="silver" class="cbox">
+       <p style="color:white">Silver</H1>
+  
+
+      </div>
+      
+      <div id="orange" class="cbox">
+       <p style="color:white">Orange</H1>
+  
+
+      </div>
+      <div id="white" class="cbox">
+       <p style="color:white">White</H1>
+  
+
+      </div>
+      <div  id="gold" class="cbox">
+       <p style="color:white">Gold</H1>
+  
+
+      </div>
+      <div id="brown" class="cbox">
+       <p style="color:white">Brown</H1>
+  
+
+      </div>
+      <div id="red" class="cbox">
+       <p style="color:white">Red</H1>
+  
+
+      </div>
+   
+      
+      <div id="purple" class="cbox">
+       <p style="color:white">Purple</H1>
+        </div>
+        
+      <div id="nude" class="cbox">
+       <p style="color:white">Nude</H1>
+        </div>
+  
+          <div id="blue" class="cbox">
+       <p style="color:white">Blue</H1>
+        </div>
+          <div id="yellow" class="cbox">
+       <p style="color:white">Yellow</H1>
+        </div>
+        
+          <div id="gray" class="cbox">
+       <p style="color:white">Gray</H1>
+        </div>
+          <div id="green" class="cbox">
+       <p style="color:white">Green</H1>
+        </div>
+        
+          <div id="pink" class="cbox">
+       <p style="color:white">Pink</H1>
+        </div>
+          <div id="pattern" class="cbox">
+       <p style="color:white">Pattern</H1>
+        </div>
+        
+          <div id="all" class="cbox">
+       <p style="color:white">All</H1>
+        </div>
+     
+      </div>
+    
+     <div style="width:100%;height:40px;background-color:#222427;clear:both" />
+   
+    
+  
+    
+   
+   
+    </center> 
+   
+   
+  </div>
+  
+  
+ 
+
+ 
+ 
+</div>
+ 
+    </body>
+</html>

@@ -1,0 +1,89 @@
+.tri-down2 
+{
+
+    /* Styling block element, not required */
+    position: relative;
+    margin-top: 1em;
+    padding: 1em;
+    border-top: 1px solid #e7e9eb;
+    background:#fff;
+    width:90%;
+}
+
+  /* Required for Down Triangle */
+  .tri-down2:before, .tri-down2:after 
+ {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: transparent;
+    border-top: 0;
+ }
+
+  /* Stroke */
+  .tri-down2:before 
+ {
+    top: -10px;
+    left: 30.7%;
+
+    /* If 1px darken stroke slightly */
+    border-bottom-color: #e7e9eb;
+    border-width: 10px;
+ }
+
+  /* Fill */
+  .tri-down2:after 
+ {
+    top: -9px;
+    left: 31%;
+    border-bottom-color:#fff;
+    border-width: 9px;
+ }
+  
+.tri-down 
+{
+
+    /* Styling block element, not required */
+    position: relative;
+    margin-top: 1em;
+    padding: 1em;
+    border-top: 1px solid #e7e9eb;
+    background:#fff;
+    width:90%;
+	
+}
+
+  /* Required for Down Triangle */
+  .tri-down:before, .tri-down:after 
+ {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: transparent;
+    border-top: 0;
+ }
+
+  /* Stroke */
+  .tri-down:before 
+ {
+    top: -10px;
+    left: 57.7%;
+
+    /* If 1px darken stroke slightly */
+    border-bottom-color: #e7e9eb;
+    border-width: 10px;
+ }
+
+  /* Fill */
+  .tri-down:after 
+ {
+    top: -9px;
+    left: 58%;
+    border-bottom-color:#fff;
+    border-width: 9px;
+ } 
+ 

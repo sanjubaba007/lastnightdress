@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+
+        @font-face {
+    font-family:ppfont;
+    src: url(fonts/AvenirNextLTPro-Regular.otf);
+}
+@font-face {
+    font-family:hfont;
+    src: url(fonts/AvenirNextLTPro-Bold.otf);
+}
+@font-face {
+    font-family:unfont;
+    src: url(fonts/AvenirNextLTPro-Demi.otf);
+}
+ 
+
+ </style>
+
+        
+
+
+    </head>
+    <body style="background-color:#fff">
+    <div data-role="page">
+        <script type="text/javascript" src="cordova.js"></script>
+    <link rel="stylesheet" type="text/css" href="jqm/jquery.mobile-1.4.2.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/editprofileview.css" />
+ 
+  <script src="jqm/jquery.min.js"></script>
+  <script src="jqm/jquery.mobile-1.4.2.min.js"></script>
+  <script src="js/editprofileview.js"></script>
+  
+
+
+     <div id=main>
+      <div id="#loadbar">
+       <img src="img/dataload.gif" id=pageLoader class=ajax-loader/> 
+ </div>
+<!-- Header -->
+ <div style="width:100%;height:45px;position:fixed; top:0%; right:0%;z-index:100;background-color:#fff;"><div id="back" style="width:10%;height:45px;float:left"><img src="img/back_arrow.png" style="margin-top:10px;margin-left:5px;width:25px;height:25px"/></div><div style="width:80%;height:45px;float:left;font-size:18px"><h1 align="center" style="margin-top:15px;font-family:hfont;font-size:16px;color:#3c4653">Edit Profile</h5></div><div id="save" style="width:10%;height:45px;float:left"><img  src="img/save_changes.png" align="right" style="margin-top:10px;margin-right:5px;width:25px;height:25px"/></div>
+   <hr size=1 />
+   </div> 
+   <div style="margin-top:60px;margin-bottom:55px">
+<center>
+<div style="background-color:#FFF ;min-height:100px;"> 
+
+<div style="background-color:#FFF;min-height:200px;">
+<div style="background-color;#fff;position:relative">
+<img src="img/user_profile_icon.png" id="largeImage" class=circle onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">
+</div>
+<span style="color:#be4d66;" id="edit">Edit</span>
+<textarea id="desc"  style="font-size:100%;font-family:ppfont;width:80%;text-align:center">Love to shop and play sports.Spend most of my time reading mags.Enjoy my gallery. </textarea>
+<div>
+<table style="height:20px;margin-top:10px">
+<tr>
+<td style="vertical-align: top;"><img src="img/location_icon.png" style="width:12px;height:12px" /></td>
+<td style="vertical-align: top;"><span id="location" style="color:#9ea6b0;font-size:13px;shadow:none">City,State</span></td>
+
+</tr>
+</table>
+</div>
+
+<div id="editprofile" style="background-color:#eff1f4;min-height:60px;width:100%; text-align:center;display:table;margin-top:10px" id="infodiv"> 
+
+ <h5 style="color:#9ea6b0;font-family:ppfont">Edit information</h5>
+
+
+</div>
+<div style="width:100%;">
+ <form id="private" method="post" action="demoform.asp">
+      <div style="width:85%;margin-left:-12%">
+     <input type="text" name="fname" id="uname" data-clear-btn="true" value="Olivia Newton Wilde" style="padding-left:30px;font-family:ppfont" required placeholder="Username">
+   </div>
+    <hr style="size:0.8;color:#b3b3b3" />
+     <div style="width:85%;margin-left:-12%">
+    <input type="text" name="fname" id="email" data-clear-btn="true" value="olivia@gmail.com" style="padding-left:30px;font-family:ppfont" required placeholder="Email">
+    </div>
+    <hr style="size:0.8;color:#b3b3b3" />
+    
+    </form>
+    </div>
+   
+     
+    <div id="changepass" style="width:95%;height:35px;">
+    <label style="width:100%;text-align:left;float:left;padding-left:30px;margin-top:7px">Change password</label>
+    </div>
+   
+   <div id="footer">
+     <div id="home" align="center" id="home" class="menudiv">
+     <img  src="img/home.png" id="menuimg" style="width:32px;height:32px"/> 
+     </div>
+     <div id="lnd" align="center" class="menudiv">
+     <img src="img/shopping.png" id="menuimg" style="width:32px;height:32px"/> 
+     </div>
+     <div align="center" style="background: -webkit-linear-gradient(left, #612045 , #d87976);" id="camera" class="menudiv">
+     <img src="img/camera.png" id="menuimg" style="width:32px;height:32px"/> 
+     </div>
+     <div align="center" id="inbox" class="menudiv">
+     <img src="img/message_icon.png" id="menuimg" style="width:32px;height:32px"/> 
+     </div>
+     <div id="profile" align="center" class="menudiv">
+     <img src="img/profile.png" id="menuimg" style="width:32px;height:32px"/> 
+     </div>
+    
+       </div>
+       </div>
+    </body>
+</html>

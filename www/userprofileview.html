@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+   <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+           
+          
+       
+   
+  
+  
+       
+
+
+ 
+    </head>
+    <body style="background-color:#fff">
+    <div data-role="page" style="margin-bottom:50px">
+    
+       <link rel="stylesheet" type="text/css" href="jqm/jquery.mobile-1.4.2.min.css" />
+  <script src="jqm/jquery.min.js"></script>
+  <script src="jqm/jquery.mobile-1.4.2.min.js"></script>
+    <link rel="stylesheet" href="css/userprofileview.css">
+ 
+    <script src="js/userprofileview.js"></script>
+    
+    
+     <div id=main>
+  
+   <div style="width:100%;height:45px;position:fixed; top:0%; right:0%;z-index:100;background-color:#fff;"><div id="back" style="width:10%;height:45px;float:left"><img src="img/back_arrow.png" style="margin-top:10px;margin-left:5px;width:25px;height:25px"/></div><div style="width:80%;height:45px;float:left"><h1 id="uname" align="center" style="margin-top:15px;font-weight:bold;font-size:18px;text-transform: capitalize;font;font-family:hfont;color:#3c4653"> Olivia Newton Wilde</h5></div><div id="setting" style="width:10%;height:45px;float:left"><img  src="img/menu_icon.png" align="right" style="padding-right:5px;margin-top:12px;width:25px;height:25px"/></div>
+   <hr size=1 />
+   </div> 
+<div style="background-color:#fff;margin-top:60px"> 
+<center>
+<div style="background-color:#fff;">
+<div style="position:relative;">
+<img src="img/user_profile_icon.png" id="largeImage" class=circle onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">
+</div>
+<div id="stars" style="width:110px;margin-top:5px"></div> 
+
+<center>
+<div style="width:60%;margin-top:-8px">
+<p id=desc style="font-size:100%;font-family:ppfont;text-align:center;color:#3c4653">Love to shop and play sports.
+Spend most of my time reading mags.
+Enjoy my gallery.</p>
+</div>
+</center>
+<div style="width:105px"><img src="img/location_icon.png" style="float:left;width:12px;height:12px" /> <h6 style="color:#BDBDBD;margin-top:3px" style="float:left" >Toronto,Canada</h6></div>
+</div>
+<center>
+
+
+ <hr size=1 style="width:98%" />
+  <div style="width:98%;height:50px;">
+ <div style="width:49.8%;height:50px;float:left">
+ <div id="message" style="width:100%;height:50px;"><div style="width:100px;margin:auto;"><img src="img/pmessage_icon.png" style="float:left;margin-top:15px;width:18px;height:18px" /><label style="float:left;color:#be4d66;margin-left:5px;margin-top:15px;">Message</label></div></div>
+ </div>
+ 
+ 
+ <div style="width:0.2%;height:55px;background-color:#DADADA;float:left"></div>
+ <div style="width:50%;height:50px;float:left">
+ <div id="follow" style="width:100%;height:50px;"><div style="width:100px;margin:auto;"><label id="flw" style="float:left;color:#be4d66;margin-left:5px;margin-top:15px;font-weight:bold">+ Follow</label></div></div>
+ 
+ </div>
+ </div>
+ <hr size=1 style="width:98%" />
+
+<div style="width:100%;min-height:50px;background-color:#fff;clear:both">
+<div style="width:98%">
+<div class="col" id="showpopup" >
+
+<p class="bank" id=precol>$0</p> 
+<p style="font-size:13px;color:#BDBDBD">Banks</p></div>
+<div style="width:0.2%;height:45px;background-color:#dadada;float:left;margin-top:3px;"></div>
+<div class="col" >
+<p class="swaps" id=precol>0</p> 
+<p id="opt" >swaps</p></div>
+<div style="width:0.2%;height:50px;background-color:#dadada;float:left;"></div>
+
+<div class="col" >
+<p class="follower" id=precol>0</p> 
+<p  id="opt" >followers</p></div>
+<div style="width:0.4%;height:45px;background-color:#dadada;float:left;margin-top:3px;"></div>
+
+<div class="col" >
+<p class="following" id=precol>0</p> 
+<p id="opt">following</p></div>
+</div>
+  
+</div>
+<hr size=1 style="width:98%" />
+</div>
+ </center>
+
+ <div id="mydiv">
+         
+          
+          </div>
+ 
+ 
+    
+    </div>
+    
+    
+   <div id="footer">
+     <div id="home" align="center" id="home" class="menudiv">
+     <img  src="img/home_gray.png" id="menuimg" style="width:32px;height:32px"/> 
+     </div>
+     <div id="lnd" align="center" class="menudiv">
+     <img src="img/shopping_gray.png" id="menuimg" style="width:32px;height:32px"/> 
+     </div>
+     <div align="center" style="background: -webkit-linear-gradient(left, #612045 , #d87976);" id="camera" class="menudiv">
+     <img src="img/camera.png" id="menuimg" style="width:32px;height:32px"/> 
+     </div>
+     <div align="center" id="inbox" class="menudiv">
+     <img src="img/message_icon_gray.png" id="menuimg" style="width:32px;height:32px"/> 
+     </div>
+     <div id="profile" align="center" class="menudiv">
+     <img src="img/profile.png" id="menuimg" style="width:32px;height:32px"/> 
+     </div>
+    
+       </div>
+       </div>
+    </body>
+</html>

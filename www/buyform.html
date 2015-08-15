@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+       <style>
+        @font-face {
+    font-family:ppfont;
+    src: url(fonts/AvenirNextLTPro-Regular.otf);
+}
+@font-face {
+    font-family:hfont;
+    src: url(fonts/AvenirNextLTPro-Bold.otf);
+}
+@font-face {
+    font-family:unfont;
+    src: url(fonts/AvenirNextLTPro-Demi.otf);
+}
+        </style>
+    </head>
+    <body>
+    <div data-role="page">
+    
+    <link rel="stylesheet" type="text/css" href="jqm/jquery.mobile-1.4.2.min.css" />
+  <script src="jqm/jquery.min.js"></script>
+  <script src="jqm/jquery.mobile-1.4.2.min.js"></script>
+<script src="js/buyform.js"></script>  
+
+       <link rel="stylesheet" href="css/buyform.css" />
+    <br/>
+    <img src="img/cancle_icon.png" id="close" style="margin-left:5%;width:32px;height:32px" />
+   <div style="width:100%;margin-bottom:50px">
+   
+   <center>
+   <div  style="width:80%;margin-top:20px;">
+<p id="fontstyle">Buying form:</p> 
+
+<div style="width:100%;">
+<img src="img/actress1.jpg" class="circle" style="float:left" id=profile_pic /><label id=uname style="font-size:16px;color:#be4d66;float:left;margin-top:10px;margin-left:7px;font-family:unfont;text-transform: capitalize">Olivia Newton Wilde</label>
+</div>
+
+<br/><br/>
+
+
+<div style="width:100%;height:100%;margin-top:10px;background-color:yellow">
+<div class="container"></div>
+<div id="info" style="width:45%;height:55%;float:left">
+<table style="width:100%;">
+<tr height="30px"><td><label ><pre id="head"> Size :</pre><pre id=size class="headval"> M</pre></label></td><tr>
+
+<tr height="30px"><td> <label><pre id="head" style="font-family:hfont"> Price :</pre><pre id="price" class="headval">$300</pre></label></td></tr>
+<tr height="30px"><td><label><pre id="head" style="font-family:hfont"> Delivery :</pre><pre id=dprice class="headval">$10</pre></label></td></tr>
+<tr height="30px"><td><label><pre id="head" style="font-family:hfont"> Total :</pre></label></td></tr>
+<tr><td><pre id=total class="headval" style="font-family:hfont">  $310</pre></td></tr>
+
+</table>
+
+
+</div>
+</div>
+
+<div class="emptybox" ></div>
+
+ <div class="box" >
+   <div id="pickup" style="width:50%;height:40px;background-color:#fff;float:left">
+      
+  
+  <table style="height:40px">
+  <tr>
+  <td><img src="img/checkmark_icon.png" /></td>
+  <td> <p id="pickuptext" class="fix" style="font-family:ppfont">Pick up</p></td>
+  </tr>
+  </table>
+  
+  </div>
+     <div id="delivery" style="width:50%;height:40px;background-color:#fff;float:left">
+      
+  
+  <table style="height:40px">
+  <tr>
+  <td><img src="img/checkmark_icon.png" /></td>
+  <td> <p id="deliverytext" class="fix" style="font-family:ppfont">Delivery</p></td>
+  </tr>
+  </table>
+  
+  </div>
+       </div>
+<div style="width:100%;clear:both">
+
+<p style="margin:auto line-height:10px;vertical-align:middle;color:black;">Shipped to:</p></div>
+ <div class="box" >
+   <div id="sadd" style="width:50%;height:40px;background-color:#fff;float:left">
+       
+  <table style="height:40px">
+  <tr>
+  <td><img src="img/checkmark_icon.png" /></td>
+  <td><p id="saddtxt" class="fix" style="font-family:ppfont">Same address</p></td>
+  </tr>
+  </table>
+  </div>
+     <div id="nadd" style="width:50%;height:40px;background-color:#fff;float:left">
+     
+  <table style="height:40px">
+  <tr>
+  <td><img src="img/checkmark_icon.png" /></td>
+  <td>  <p id="naddtxt"class="fix" style="font-family:ppfont">New address</p></td>
+  </tr>
+  </table>
+  </div>
+       </div>
+
+  
+     <br>
+   <div style="width:100%;">
+ <form id="buyform" method="post" action="demoform.asp">
+     <input type="text"  id="address" data-clear-btn="true" required placeholder="Address" style="font-family:ppfont">
+    <hr color="#fff" />
+     <input type="text"  id="city" data-clear-btn="true" required placeholder="City" style="font-family:ppfont">
+    <hr color="#fff" />
+     <input type="text"  id="zipcode" data-clear-btn="true" required placeholder="ZIP code" style="font-family:ppfont">
+    
+    </form>
+    </div>
+  </center>
+  
+   </div>
+  <div id="footer" >
+      <div >
+   <div id="spay" style="width:49.4%;height:40px;background-color:#be4d66;float:left;color:white">
+       <center>
+       <p id="spaytxt" class="fix" style="font-family:ppfont">Same Payment</p>
+  </center>
+    </div>
+    <div style="width:0.2%;height:40px;background-color:#3c4653;float:left"></div>
+     <div id="npay" style="width:49.4%;height:40px;background-color:#be4d66;float:left;color:#000">
+       <center>
+       <p id="npaytxt"class="fix" style="font-family:ppfont">New Payment</p>
+  </center>
+  </div>
+       </div>
+       </div>
+    </body>
+</html>

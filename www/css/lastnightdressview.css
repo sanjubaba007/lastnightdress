@@ -1,0 +1,174 @@
+ body
+ {
+ margin-top:0px;
+ margin-left:0px;
+ }
+ #mydiv
+    {
+    width:100%;
+    height:100%;
+    background-color:white;
+    margin-top:48px;
+    
+   
+    }
+    .myimgdiv
+    {
+    height:15em;
+    width:31%;
+    float:left;
+    position:relative;
+    overflow: hidden;
+    margin:1% 1% 1% 1%;
+    
+    
+    }
+    #imgdiv
+    {
+    height:150px;
+    width:150px;
+    float:left;
+   position:relative;
+    background-color:red;
+    
+    }
+    #imgdiv1
+    {
+    height:150px;
+    width:150px;
+    float:left;
+   position:relative;
+    background-color:red;
+    margin:5px 5px 5px 5px;
+    
+    }
+    .bottom {
+   position:absolute;
+    bottom:-11px;
+    text-align:left;
+    padding:2px 2px 2px 2px;
+   background:rgba(0,0,0,0.4);
+    color:#fff;
+    font-size:11px;
+    font-family:ppfont;
+}
+.top
+{
+  position:absolute;
+ top:0px;
+}
+
+#footer
+{     background:rgba(0,0,0,0.7);
+     
+    position:fixed;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    height:50px;
+    margin-bottom:0px;
+    width:100%;
+    
+   }
+   .fix
+   {
+   
+   font-weight:bold;
+   }
+   .header-cont {
+    position:fixed; top:0%; right:0%;z-index:100;
+    width:100%;
+    background-color:#fff;
+   
+    
+}
+   .post	{ 
+       position:fixed; top:50%;
+    right:0px;align:right;
+    width:14px;height:110px;
+    background-color:#000;
+    z-index:100;
+     }
+  
+  hr { margin: 0.1em auto; color:#DADADA;}
+  #menuimg 
+  {
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  margin:auto;
+} 
+.menudiv
+{
+
+width:20%;
+height:50px;
+float:left;
+position:relative;
+}
+.ajax-loader 
+{
+  position: absolute;
+    left: 0;
+    top: 0;
+    right: -32px; /* -1 * image width / 2 */
+    margin-top: -32px;  /* -1 * image height / 2 */
+    display: block;
+}
+#pageLoader
+{
+ z-index:100;
+   position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -32px; /* -1 * image width / 2 */
+  margin-top: -32px;
+  
+}
+.ui-mobile .ui-page 
+{
+
+background: white;//-webkit-linear-gradient(top, #f4f3ff, rgba(93, 177, 223, 0.75));
+
+}
+ 
+ .imgcontainer
+{
+  
+      background-size:cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+     float: left;
+    
+     position:relative;
+     margin:1px 0px 1px 0px;
+     background-color:#000;
+     
+    
+}
+.imgcontainer2
+{
+  
+      background-size:cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+     float: left;
+    
+     position:relative;
+     margin:1px 2px 1px 2px;
+     background-color:#000;
+     
+    
+}
+.ui-focus {
+ -moz-box-shadow: none !important;
+ -webkit-box-shadow: none !important;
+ box-shadow: none !important;
+}
+.ui-input-text {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+   box-shadow: none;
+}

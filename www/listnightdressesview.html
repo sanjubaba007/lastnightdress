@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+       
+    <style>
+
+        @font-face {
+    font-family:ppfont;
+    src: url(fonts/AvenirNextLTPro-Regular.otf);
+}
+@font-face {
+    font-family:hfont;
+    src: url(fonts/AvenirNextLTPro-Bold.otf);
+}
+@font-face {
+    font-family:unfont;
+    src: url(fonts/AvenirNextLTPro-Demi.otf);
+   
+}
+
+.ui-input-text{
+    border: none !important;
+    box-shadow: none !important;
+}
+ 
+ </style>
+	
+    </head>
+    <body onload="onLoad()">
+    <div data-role="page" style="margin-bottom:50px">
+    
+      <link rel="stylesheet" type="text/css" href="css/lastnightdressview.css" />
+    <link rel="stylesheet" type="text/css" href="jqm/jquery.mobile-1.4.2.min.css" />
+ 
+  <script src="cordova.js"></script>
+  
+   <script src="jqm/jquery.min.js"></script>
+  <script src="jqm/jquery.mobile-1.4.2.min.js"></script>
+ 
+<script src="js/jquery-image-loader-min.js"></script>
+  	<script src="js/lastnightdressview.js"></script>
+  <div id="#loadbar">
+       <img src="img/dataload.gif" id=pageLoader class=ajax-loader/> 
+ </div>
+      <div style="width:100%;height:45px;position:fixed; top:0%; right:0%;z-index:100;background-color:#fff;"><div id="sear" style="width:10%;height:45px;float:left"><img src="img/search_icon.png" style="margin-top:10px;margin-left:5px;width:25px;height:25px"/></div><div style="width:80%;height:45px;float:left;"><input type="text" align="center" data-icon="search" data-clear-btn="true" style="font-size:14px;width:100%;height:30px;margin:0px;text-align:left;font-family:ppfont;font-color:#3c4653;box-shadow:none;border:none" placeholder="Search" class="search-box" /></div><div id="favorite" style="width:10%;height:45px;float:left"><img  id="myfav" src="img/no_favorate_icon.png" align="right" style="margin-top:12px;margin-right:5px;width:22px;height:22px"/></div>
+   <hr size=1 />
+   </div> 
+    
+    
+             <div id="mydiv">
+         
+          
+          </div>
+       <div class="post" id="post"><img src="img/arrow_filter.png"  style="margin-top:50px;width:12px;height:12px"/></div>
+  
+  
+  <div id="footer">
+     <div id="home" align="center" id="home" class="menudiv">
+     <img  src="img/home_gray.png" id="menuimg" style="width:32px;height:32px"/> 
+     </div>
+     <div id="lnd" align="center" class="menudiv">
+     <img src="img/shopping.png" id="menuimg" style="width:32px;height:32px"/> 
+     </div>
+     <div align="center" style="background: -webkit-linear-gradient(left, #612045 , #d87976);" id="camera" class="menudiv">
+     <img src="img/camera.png" id="menuimg" style="width:32px;height:32px"/> 
+     </div>
+     <div align="center" id="inbox" class="menudiv">
+     <img src="img/message_icon_gray.png" id="menuimg" style="width:32px;height:32px"/> 
+     </div>
+     <div id="profile" align="center" class="menudiv">
+     <img src="img/profile_gray.png" id="menuimg" style="width:32px;height:32px"/> 
+     </div>
+    
+       </div>
+       
+       </div>
+    </body>
+</html>

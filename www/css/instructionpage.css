@@ -1,0 +1,222 @@
+body
+{
+
+text-transform:none;
+}
+
+
+
+
+
+			.divClass:hover{
+			
+				-webkit-box-shadow: 2px 2px 19px #CCC;
+				
+			}
+			
+			.divClass:active{
+				
+				-webkit-box-shadow: 2px 2px 19px #2E9AFE;
+				
+			}
+	.circle
+{
+border-radius:50% 50% 50% 50%;
+width:80px;
+height:80px;
+border: 2px solid #ffffff;
+background-image: url("http://www.billboard.com/files/styles/promo_650/public/media/do-no-reuse-taylor-swift-the-beat-bb36-sarah-barlow-billboard-650.jpg");
+ background-size: cover;
+ background-repeat: no-repeat;
+  background-position: 50% 50%;
+ position:relative;
+
+}		
+pre
+{
+font-size:12px;
+
+width:100%;
+ margin:0;
+  padding:0;
+}
+#fontstyle
+{
+font-weight:bold;
+font-size:14px;
+padding-top:10px;
+width:100%;
+line-height:10px;
+margin:0;
+
+font-family:hfont
+}
+p
+{
+width:100%;
+line-height:8px;
+font-size:0.7em;
+padding:0px;
+magin:0px;
+
+}
+#footer
+{
+    background:#be4d66;
+    position:fixed;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    height:40px;
+    margin-bottom:0px;
+    width:100%;
+   }
+.divClass:hover{
+				-o-box-shadow: 2px 2px 19px #fff;
+				-webkit-box-shadow: 2px 2px 19px #fff;
+				-moz-box-shadow: 2px 2px 19px #fff;
+			}
+			
+			.divClass:active{
+				-o-box-shadow: 2px 2px 19px #2E9AFE;
+				-webkit-box-shadow: 2px 2px 19px #2E9AFE;
+				-moz-box-shadow: 2px 2px 19px #2E9AFE;
+			}
+			h4
+			{
+			margin:auto;
+    line-height:40px;
+    vertical-align:middle;
+			}
+			
+			@media (max-width: 360px) {
+            p
+			{
+			font-size:0.8em;
+			font-family:unfont;
+			color:#3c4653;
+			}
+			
+			    .circle
+{
+border-radius:50% 50% 50% 50%;
+width:115px;
+height:115px;
+border: 2px solid #ffffff;
+background-image: url("http://www.billboard.com/files/styles/promo_650/public/media/do-no-reuse-taylor-swift-the-beat-bb36-sarah-barlow-billboard-650.jpg");
+ background-size: cover;
+ background-repeat: no-repeat;
+  background-position: 50% 50%;
+ position:relative;
+
+}		
+		}
+		
+			@media (max-width: 320px) {
+            p
+			{
+			font-size:0.7em;
+			font-family:unfont;
+			color:#3c4653;
+			}
+			#fontstyle
+{
+font-weight:bold;
+font-size:14px;
+padding-top:10px;
+width:100%;
+line-height:10px;
+margin:0;
+
+font-family:hfont
+}
+          .circle
+{
+border-radius:50% 50% 50% 50%;
+width:62px;
+height:62px;
+border: 2px solid #ffffff;
+background-image: url("http://www.billboard.com/files/styles/promo_650/public/media/do-no-reuse-taylor-swift-the-beat-bb36-sarah-barlow-billboard-650.jpg");
+ background-size: cover;
+ background-repeat: no-repeat;
+  background-position: 50% 50%;
+ position:relative;
+
+}		
+          
+          }
+
+@media (min-width: 500px) {
+            p
+			{
+			font-size:1em;
+			font-family:unfont;
+			color:#3c4653;
+			}
+#fontstyle
+{
+font-weight:bold;
+font-size:18px;
+padding-top:15px;
+width:100%;
+line-height:10px;
+margin:0;
+font-family:hfont
+}
+}
+
+@media (min-width: 700px) {
+           p
+			{
+			font-size:1em;
+			font-family:unfont;
+			color:#3c4653;
+			}
+			
+			#fontstyle
+{
+font-weight:bold;
+font-size:20px;
+padding-top:20px;
+width:100%;
+line-height:10px;
+margin:0;
+
+font-family:hfont
+}
+.circle
+{
+border-radius:50% 50% 50% 50%;
+width:270px;
+height:270px;
+border: 2px solid #ffffff;
+background-image: url("http://www.billboard.com/files/styles/promo_650/public/media/do-no-reuse-taylor-swift-the-beat-bb36-sarah-barlow-billboard-650.jpg");
+ background-size: cover;
+ background-repeat: no-repeat;
+  background-position: 50% 50%;
+ position:relative;
+
+}		
+}
+
+@media (min-width: 1200px) {
+          p
+			{
+			font-size:1.3em;
+			font-family:unfont;
+			color:#3c4653;
+			}
+
+}
+@font-face {
+    font-family:unfont;
+    src: url(fonts/AvenirNextLTPro-Regular.otf);
+}
+@font-face {
+    font-family:hfont;
+    src: url(fonts/AvenirNextLTPro-Bold.otf);
+}
+p
+{
+	
+}

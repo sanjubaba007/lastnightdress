@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+      <style>
+        @font-face {
+    font-family:ppfont;
+    src: url(fonts/AvenirNextLTPro-Regular.otf);
+}
+@font-face {
+    font-family:hfont;
+    src: url(fonts/AvenirNextLTPro-Bold.otf);
+}
+@font-face {
+    font-family:unfont;
+    src: url(fonts/AvenirNextLTPro-Demi.otf);
+}
+        </style>
+
+    </head>
+    <body onload="onLoad()">
+    <div data-role="page">
+     <link rel="stylesheet" type="text/css" href="jqm/jquery.mobile-1.4.2.min.css" />
+   <script src="jqm/jquery.min.js"></script>
+  <script src="jqm/jquery.mobile-1.4.2.min.js"></script>
+        <script src="js/jquery.timeago.js"></script>
+      <script src="js/jquery.timeago2.js"></script>
+
+      <script type="text/javascript" src="cordova.js"></script>
+     <link rel="stylesheet" href="css/whatshappeninginlnd.css">
+
+  	<script src="js/whatshappeninginlnd.js"></script>
+
+
+<!-- Header -->
+  <div style="width:100%;height:45px;position:fixed; top:0%; right:0%;z-index:100;background-color:#fff;"><div id="back" style="width:10px;height:45px;float:left"></div><div style="width:80%;height:45px;float:left;background-color:#fff"><label align="lefts" style="margin-top:13px;font-family:unfont;font-color:#3c4653;font-size:18px;font-family:hfont">Last Night's Dress</h5></div><div style="width:10%;height:45px;background-color:#fff;float:left;font-family:ppfont"></div>
+   <hr size=1 style="clear:both" />
+   </div>
+
+
+     <div id="#loadbar">
+       <img src="img/dataload.gif" id=pageLoader class=ajax-loader/>
+ </div>
+
+    <div id="dynamictable">
+
+
+
+</div>
+
+<center>
+<!-- pop -->
+<div data-role="popup" id="myPopup2" style="width:100%" data-corners="false"  style="box-shadow:none;background:rgba(248,248,248,0.5)" data-position-to="window">
+
+    <br/>
+    <p style="width:100%;font-size:16px;color:#000;font-family:hfont;text-align:center">SWAP REQUEST</p>
+
+
+    <div style="width:100%;font-size:16px;position:absolute;top:35%;">
+  <center>
+    <p style="line-height:5px;font-size:16px;font-family:unfont">Are you sure</p>
+    <p style="line-height:5px;font-size:16px;font-family:unfont">You want to continue ?</p>
+    </center>
+    </div>
+
+    <br>
+    <div class="ui-grid-a" style="position:absolute;bottom:-8px;width:100%">
+    <div class="ui-block-a"><button type="submit" id="cancel"  data-corners="false" data-transition="flip" style="background-color:eff1f4;color:#A4A4A4;box-shadow:none">Cancel</button></div>
+    <div class="ui-block-b"><button type="submit" id="continue"  data-corners="false" style="background-color:eff1f4;color:#A4A4A4;box-shadow:none">Continue</button></div>
+</div>
+</div>
+
+
+</center>
+<!-- popup end -->
+
+
+
+
+
+  <!-- second pop up -->
+<div  id="cmntdialog" data-transition="slideup" style="position:fixed;z-index:1001;top:0;left:0;width:100%;height:100%;background-color:#fff;display:none">
+         <div id="header" ><table style=" table-layout: fixed;height:40px"><tr><td id="back-comment"><img src="img/back_comment.png" style="width:32px;height:32px" /></td><td><span style="color:#fff;font-family:unfont" />Comments</span></td></tr></table></div>
+
+       <div style="overflow-y:scroll;overflow-x:hidden;display:block;background-color:#fff;width:100%;clear:both;margin-top:5px;" id="commentdiv"></div>
+       <!--comment box -->
+       <div id="cmntbox" style="width:100%;clear:both"><div style="width:80%;height:50px;float:left"><input id="msg" name="" type="text" style="width:100%;height:50px;border:none" placeholder="Add a comment" /></div><div id="send" align="center" style="width:20%;height:52px;float:left;  background-color:#be4d66;position:relative;margin-top:8px"><img src="img/send_icon.png" id="sendimg" style="width:24px;height:24px" /></div></div>
+      </div>
+       <!-- end here -->
+
+
+
+
+ <div id="footer">
+     <div id="home" align="center" id="home" class="menudiv">
+     <img  src="img/home.png" id="menuimg" style="width:32px;height:32px"/>
+     </div>
+     <div id="lnd" align="center" class="menudiv">
+     <img src="img/shopping_gray.png" id="menuimg" style="width:32px;height:32px"/>
+     </div>
+     <div align="center" style="background: -webkit-linear-gradient(left, #612045 , #d87976);" id="camera" class="menudiv">
+     <img src="img/camera.png" id="menuimg" style="width:32px;height:32px"/>
+     </div>
+     <div align="center" id="inbox" class="menudiv">
+     <img src="img/message_icon_gray.png" id="menuimg" style="width:32px;height:32px"/>
+     </div>
+     <div id="profile" align="center" class="menudiv">
+     <img src="img/profile_gray.png" id="menuimg" style="width:32px;height:32px"/>
+     </div>
+   </div>
+
+           <div id="shadowdiv" class="fulldiv">
+      <div id="mydiv">
+
+        <br/>
+        <p style="width:100%;font-size:16px;color:#000;font-family:hfont;text-align:center">SWAP REQUEST</p>
+
+
+        <div style="width:100%;font-size:16px;position:absolute;top:35%;">
+      <center>
+        <p style="line-height:5px;font-size:16px;font-family:unfont">Are you sure</p>
+        <p style="line-height:5px;font-size:16px;font-family:unfont">You want to continue ?</p>
+        </center>
+        </div>
+
+        <br>
+        <div class="ui-grid-a" style="position:absolute;bottom:-8px;width:100%">
+        <div class="ui-block-a" style="width:50%;float:left"><button type="submit" id="cancel"  data-corners="false" data-transition="flip" style="background-color:eff1f4;color:#A4A4A4;box-shadow:none;width:100%;height:45px;">Cancel</button></div>
+        <div class="ui-block-b" style="width:50%;float:left"><button type="submit" id="continue"  data-corners="false" style="background-color:eff1f4;color:#A4A4A4;box-shadow:none;width:100%;height:45px">Continue</button></div>
+    </div>
+
+        </div>
+
+       </div>
+       </div>
+    </body>
+</html>

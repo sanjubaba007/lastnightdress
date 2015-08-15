@@ -1,0 +1,27 @@
+#main
+{
+margin-top:45px;
+
+}
+
+
+.ui-mobile .ui-page {
+
+background:#fff; //-webkit-linear-gradient(top, #f4f3ff, rgba(93, 177, 223, 0.75));
+
+ }
+ #textdiv
+ {
+ width:80%;height:55px;float:left;
+ }
+ #arrowdiv
+ {
+ width:20%;float:left;height:55px;
+
+ }
+ #maindiv
+ {
+ width:100%;min-height:55px;background-color:#fff;
+ }
+ hr { margin:0px auto;color:#dadada; }
+ 

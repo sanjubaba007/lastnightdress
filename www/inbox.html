@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+       
+          <script type="text/javascript" src="cordova.js"></script>
+       
+       
+	  <link rel="stylesheet" href="js/jquery.rating.css">
+<script src="js/jquery.form.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/jquery.MetaData.js"></script>
+<script src="js/jquery.rating.js"></script>
+<script src="js/jquery.rating.pack.js"></script>
+  <script src="myjqmjs/jquery.js"></script>
+        <script src="ews_rating_stars/ewsRatingStars.jquery.js"></script>
+        <link rel="stylesheet" type="text/css" href="ews_rating_stars/ewsRatingStars.jquery.css">
+	  
+        
+<script type="text/javascript" charset="utf-8">
+var i=0;
+jQuery(document).ready(function() {
+                
+
+                jQuery('.active-stars-yellow').ewsRatingStars({
+                    class : 'ewsRatingStarColorRed',
+                    defaultValue : 0,
+					onSetValue : function (obj, value) {
+                        jQuery('#rate').val(value);
+                    }
+                });
+    //back event            
+    $("#back").on("click", function() {
+    $("#back").css('background-color','#be4d66');
+  
+       history.go(-1);
+    navigator.app.backHistory(); 
+
+});   
+            });
+    // Wait for device API libraries to load
+    //
+    function onLoad() {
+    
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        // Register the event listener
+		getData();
+    //setup();
+     }
+
+   
+function setup(result)
+{
+
+
+
+
+  var obj = jQuery.parseJSON( result );
+
+$.each(obj.data, function(idx, obj) {
+
+$("#dynamictable").append($('<hr>',{color:'#fff',size:'1'}));
+
+$("#dynamictable").append('<table border="0" cellpadding="0" cellspacing="0" style="width:100%"><tr><td style="vertical-align:top;width:55px"><img src='+obj.imgurl+' align="center" class="circle" /></td><td style="vertical-align:left;width:83%"><div style="margin-top:5px;margin-left:6px"><label style="color:#be4d66;font-family:hfont; text-transform: capitalize;">'+obj.name+'</label></div> <div style="clear:both;margin-top:2px;margin-left:6px"><p style="text-align:left;font-family:ppfont;font-size:15px">'+obj.msg+'</p></div></td><td  style="vertical-align:top;width:10%;margin-top:5px"><time class="timeago" datetime="" style="color:#dadada;font-size:10px;margin-top:3px">11:34PM</time></td></tr></table>')
+//$("#commentdiv").append('<br>');
+//$(".timeago").timeag();
+//$("#dynamictable").append($('<hr>',{color:'#DADADA',size:'1'}));
+ $("#dynamictable").append($('<div>',{color:'#DADADA',style:'width:100%;height:1px;clear;both;background-color:#dadada'}));
+
+i++;
+});
+
+}
+function getData()
+ {
+     var request = $.ajax({
+    type: 'POST',
+    timeout: 5000,
+    url: 'http://52.74.70.40/lnd/inboxope.php',
+    data: {sid:'abc100',rid:'abc101',rqid:3} })
+    .done(function(data) {  
+    setup(data);
+   
+    
+    })
+    .fail(function() { alert("error"); 
+    })
+    .always(function() {$('#pageLoader').hide(); });
+}
+
+$( document ).ready(function() {
+    $("#post").on("click", function() {
+    var msg=document.getElementById("message").value;
+   var uname=localStorage.getItem("uname");
+   var url=localStorage.getItem("url");
+    i++;
+ $("#dynamictable").append($('<hr>',{color:'#fff',size:'1'}));
+
+$("#dynamictable").append('<table border="0" cellpadding="0" cellspacing="0" style="width:100%" ><tr><td style="vertical-align:top;width:55px"><img src='+url+' align="center" class="circle" /></td><td style="vertical-align:left;width:83%"><div style="margin-top:5px;margin-left:6px"><label style="color:#be4d66;font-family:hfont; text-transform: capitalize;">'+uname+'</label></div> <div style="clear:both;margin-top:3px;margin-left:6px"><p style="text-align:left;font-family:ppfont;font-size:15px">'+msg+'</p></div></td><td  style="vertical-align:top;width:10%;margin-top:5px"><time class="timeago" datetime="" style="color:#dadada;font-size:10px;margin-top:3px">11:34PM</time></td></tr></table>')
+//$("#commentdiv").append('<br>');
+//$(".timeago").timeag();
+//$("#dynamictable").append($('<hr>',{color:'#DADADA',size:'1'}));
+ $("#dynamictable").append($('<div>',{color:'#DADADA',style:'width:100%;height:1px;clear;both;background-color:#dadada'}));
+
+sendMessage(msg);
+   
+});
+ $("#done").on("click", function() {
+// alert($('#rate').val());
+ //rate($('#rate').val());
+rateseller($('#rate').val());
+});
+    
+});
+
+//send message
+
+function sendMessage(message)
+ {
+ var uname=localStorage.getItem("uname");
+   var url=localStorage.getItem("url");
+     var request = $.ajax({
+    type: 'POST',
+    timeout: 5000,
+    url: 'http://52.74.70.40/lnd/inboxope.php',
+    data: {sname:uname,sid:'abc100',rid:'abc101',msg:message,sprofpic:url,rqid:2} })
+    .done(function(data) {  
+    var json = JSON.parse(data);
+  if(json.status)
+  {
+  alert(json.message);
+  document.getElementById("message").value='';
+  }
+  else
+  {
+  alert('message not send');
+  }
+    
+    })
+    .fail(function() { alert("problem in sending message"); 
+    })
+    .always(function() { });
+}
+function rateseller(rateval)
+{
+
+
+var formData = {uname:"sanju",rateval:rateval,rqid:"1"}; //Array 
+ 
+$.ajax({
+    url : "http://52.74.70.40/lnd/inboxope.php",
+    type: "POST",
+    data : formData,
+    success: function(data, textStatus, jqXHR)
+    {
+        //data - response from server
+      var json = JSON.parse(data);
+    if (json.status ==true)
+	{
+	alert(json.message);
+	
+	}
+    
+    
+    },
+    error: function (jqXHR, textStatus, errorThrown)
+    {
+ alert(errorThrown);
+    }
+});
+
+}
+    </script>
+ 
+ 
+<style>
+body
+{
+
+    text-transform:none;
+    background:#fff;
+     
+}
+#dynamictable
+{
+    width:100%;
+    background-color:white;
+    margin-bottom:50px;
+    margin-top:50px;
+    
+}
+.circle
+{
+border-radius:50% 50% 50% 50%;
+width:40px;
+height:40px;
+border: 2px solid #ffffff;
+
+
+}
+.mydiv
+    {
+    width:100%;
+    height:100%;
+    background-color:white;
+    
+    }
+#pageLoader
+{
+ 
+   position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -32px; /* -1 * image width / 2 */
+  margin-top: -32px;
+  
+}
+#div
+{
+ width: 100%;
+    height: 250px;
+    
+
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0%;
+    right: 0;
+
+    margin: auto;
+    background-color:#abc123;
+}
+.ajax-loader {
+  position: absolute;
+    left: 0;
+    top: 0;
+    right: -32px; /* -1 * image width / 2 */
+    margin-top: -32px;  /* -1 * image height / 2 */
+    display: block;
+}
+
+#footer
+{
+    background-color:#DADADA;
+    position:fixed;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    height:50px;
+    margin-bottom:0px;
+    width:100%;
+    border-style: solid;
+    border-width: 1px;
+    border-color:#DADADA;
+}
+input {
+ outline:none;
+}
+ 
+			 #reply{
+    margin:auto;
+    line-height:50px;
+    vertical-align:middle;
+       }
+       hr {padding:0px;margin:0px; color:#DADADA;}
+
+#done:hover
+            {
+				-o-box-shadow: 2px 2px 19px #fff;
+				-webkit-box-shadow: 2px 2px 19px #fff;
+				-moz-box-shadow: 2px 2px 19px #fff;
+			}
+			
+			#done:active
+			{
+				-o-box-shadow: 2px 2px 19px #2E9AFE;
+				-webkit-box-shadow: 2px 2px 19px #2E9AFE;
+				-moz-box-shadow: 2px 2px 19px #2E9AFE;
+			}
+	   @font-face {
+    font-family:ppfont;
+    src: url(fonts/AvenirNextLTPro-Regular.otf);
+}
+@font-face {
+    font-family:hfont;
+    src: url(fonts/AvenirNextLTPro-Bold.otf);
+}
+@font-face {
+    font-family:unfont;
+    src: url(fonts/AvenirNextLTPro-Demi.otf);
+		
+</style>
+
+    </head>
+    <body  onload="onLoad()" >
+    <div style="width:100%;height:45px;position:fixed; top:0%; right:0%;z-index:100;background-color:#fff;"><div id="back" style="width:10%;height:45px;float:left"><img src="img/back_arrow.png" style="margin-top:10px;margin-left:5px;width:25px;height:25px"/></div><div style="width:80%;height:45px;float:left;"><h1 align="center" style="width:100%;height:40px;margin:auto;text-align:center;padding-top:13px;font-size:18px;font-family:unfont">Inbox</h4></div><div style="width:10%;height:45px;float:left"></div>
+   <hr size=1 />
+   </div> 
+     <div id="#div">
+       <img src="img/dataload.gif" id=pageLoader class=ajax-loader/> 
+ </div>
+     <div id="dynamictable" >
+ 
+     
+    
+</div>
+
+<div style="width:100%;height:200px;">
+<center>
+<p style="font-family:unfont">Rate your shopping experience</p>
+
+<div class="active-stars-yellow space"></div>
+     
+
+ <div id="done" style="margin-top:20px;width:100px;height:25px;-webkit-border-radius: 99px;-moz-border-radius: 99px;border-radius: 99px;border:1px solid #BE4D66;background-color:#ffffff;"><p style="margin-top:3px;color:#be4d66;text-size:16px;font-family:ppfont">Done!</p></div>
+<input type="hidden" id="rate"  value="0" />
+
+</center>
+
+
+</div>
+<div id="footer">
+
+    <div style="float:left;width:80%;height:50px;"><input id="message" type="text" style="border-style:none;width:100%;height:50px;font-size:15px;padding-left:15px" placeholder="Write a reply"/></div><div id="post" style="float:left;width:20%;height:50px;"><h3 id="reply" style="width:100%;text-align:center;font-size:10px">Reply</h3></div>
+    </div>
+    </body>
+</html>

@@ -1,0 +1,259 @@
+body
+{
+
+    text-transform:none;
+    background:#9ea6b0;
+    margin:0px;
+     
+}
+.circle
+{
+border-radius:50% 50% 50% 50%;
+width:90px;
+height:90px;
+border: 2px solid #ffffff;
+margin-left:5px;
+}
+
+div.container4 {
+    position: relative 
+    width:100%;
+    height:40px;
+    background-color:#be4d66;
+    
+    }
+div.container4 p
+{
+
+
+font-size:14px;
+color:white;
+text-align:center;
+    position: relative 
+top:50%;
+bottom:50%;
+left:50%;
+display: inline-block;
+width:100%;
+}
+div
+{
+width:100%;
+}
+#main{
+  position:relative;
+
+  background-color:#fff;
+  margin-bottom:50px;
+  width:100%;
+  height:100%;
+}
+#fix{
+  position:relative;
+
+  top:-35px;
+  
+  
+}
+#addphoto
+{
+background-color:#df8b86;
+height:100px;
+ background: -webkit-linear-gradient(left, #612045 , #d87976); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, #612045 , #d87976); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, #612045 , #d87976); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, #612045 , #d87976); /* Standard syntax */
+position:relative;
+
+  top:-35px;
+}
+#mypic
+{
+  margin: auto;
+       position: absolute;
+       top: 0; 
+       left: 0;
+       bottom: 0; 
+       right: 0;
+       width:80px;
+height:80px;
+}
+#dynamictable
+{
+    width:100%;
+    height:100%;
+    background-color:white;
+   
+    font-size:14px;
+   
+}
+#msgtab
+{
+    width:100%;
+    background-color:#fff;
+   
+    font-size:14px;
+      
+   
+}
+
+
+
+
+.rect
+{
+width:40px;
+height:40px;
+
+}
+.actionbar {
+    width: 100%; 
+  top:0;
+  left:0;
+  
+    
+}
+.header-cont {
+    position:fixed; top:0%; right:0%;z-index:100;
+    width:100%;
+    background-color:#fff;
+     
+}
+#footer
+{     background:rgba(0,0,0,0.8);
+     
+    position:fixed;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    height:50px;
+    margin-bottom:0px;
+    width:100%;
+    
+   }
+  #menuimg {
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  margin:auto;
+} 
+.menudiv
+{
+
+width:20%;
+height:50px;
+float:left;
+position:relative;
+}
+hr { margin: 0.1em auto; color:#DADADA;}
+.ui-mobile .ui-page {
+
+background: white;//-webkit-linear-gradient(top, #f4f3ff, rgba(93, 177, 223, 0.75));
+
+ }
+  .ui-popup-container, .ui-popup {
+   width:120px;
+   height:40px;
+   
+    padding:0;
+    margin-bottom:30px;
+   
+}
+.ui-corner-all {
+   -webkit-border-radius:0 !important;
+   border-radius: 0 !important;
+   background:#be4d66;  
+   
+}
+.ui-popup { -webkit-transform:translateZ(0); }
+
+
+.ajax-loader {
+  position: absolute;
+    left: 0;
+    top: 0;
+    right: -32px; /* -1 * image width / 2 */
+    margin-top: -32px;  /* -1 * image height / 2 */
+    display: block;
+}
+#pageLoader
+{
+ z-index:100;
+   position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -32px; /* -1 * image width / 2 */
+  margin-top: -32px;
+  
+}
+#centerimg
+{
+display: block;
+margin-left: auto;
+margin-right: auto;
+
+}
+ @font-face {
+    font-family:ppfont;
+    src: url(fonts/AvenirNextLTPro-Regular.otf);
+}
+@font-face {
+    font-family:hfont;
+    src: url(fonts/AvenirNextLTPro-Bold.otf);
+}
+.circle
+{
+border-radius:50% 50% 50% 50%;
+width:40px;
+height:40px;
+border: 2px solid #ffffff;
+
+}
+#mytable
+{
+  width:100%;
+    table-layout: fixed;
+    background-color:white;
+    padding-top:3px;
+    padding-bottom:3px; 
+}
+td
+{
+ vertical-align:top;  
+    
+}
+#uname
+{
+display:inline;
+font-family:unfont;
+
+text-overflow:ellipsis;
+word-break:break-all;
+text-transform: capitalize;
+font-size:16px;
+color:#be4d66;
+}
+#msg
+{
+display:block;
+text-overflow: ellipsis;
+ white-space: nowrap;overflow: 
+ hidden;
+ margin:0px;
+}
+#time
+{
+    font-size:12px;
+    color:#DADADA;
+    margin-top:8px;
+}
+#mytwodiv
+{
+    width:50%;
+    height:50px;
+    float:left;
+   
+    
+}
